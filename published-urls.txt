@@ -78,9 +78,12 @@ https://openai.com/index/introducing-openai-privacy-filter
 https://openai.com/index/introducing-workspace-agents-in-chatgpt/
 https://openai.com/index/mrc-supercomputer-networking
 https://openai.com/index/open-source-codex-orchestration-symphony
+https://openai.com/index/running-codex-safely
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
 https://openai.com/index/the-next-evolution-of-the-agents-sdk
 https://openai.com/index/where-the-goblins-came-from
+https://posthog.com/blog/agents-closed-4063-errors
+https://posthog.com/blog/best-mcp-servers-for-startups
 https://posthog.com/blog/duckdb-vs-clickhouse
 https://posthog.com/blog/making-claude-cowork-actually-useful
 https://posthog.com/blog/self-driving-product
@@ -93,6 +96,8 @@ https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app
 https://sentry.engineering/blog/from-monkey-patching-to-tracing-channels
 https://sentry.engineering/blog/next-halloween-im-dressing-as-on2
 https://sentry.engineering/blog/swizzling-swiftui-view-body
+https://sentry.io/blog/fixing-javascript-observability/
+https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems/
 https://shir-man.com/free-llm/
 https://sierra.ai/blog/the-ai-native-interview
 https://t.me/rvnikita_blog/1735
@@ -101,6 +106,7 @@ https://thezvi.substack.com/p/ai-165-in-our-image
 https://thezvi.substack.com/p/ai-166-google-sells-out
 https://thezvi.substack.com/p/ai-167-the-prior-restraint-era-begins
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding
+https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding-f54
 https://thezvi.substack.com/p/gpt-55-capabilities-and-reactions
 https://thezvi.substack.com/p/opus-47-part-2-capabilities-and-reactions
 https://thezvi.substack.com/p/opus-47-part-3-model-welfare
@@ -141,6 +147,7 @@ https://www.deeplearning.ai/the-batch/issue-347/
 https://www.deeplearning.ai/the-batch/issue-349/
 https://www.deeplearning.ai/the-batch/issue-350/
 https://www.deeplearning.ai/the-batch/issue-351/
+https://www.deeplearning.ai/the-batch/issue-352
 https://www.jeffbullas.com/stop-using-just-one-ai/
 https://www.therundown.ai/p/openai-superapp-hiding-inside-codex
 https://www.youtube.com/@MSE435EconomicsofAI
