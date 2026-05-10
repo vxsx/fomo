@@ -94,24 +94,49 @@ Hard rules:
 
 **No reprints — checked against the persistent ledger.** A repo-root file
 `published-urls.txt` holds every `read-on` URL ever shipped, one per line,
-sorted. It's checked into git and is the source of truth — do not regenerate
-it from `magazines/*.html` on the fly, do not write to `/tmp/`.
+sorted, **canonicalized**. It's checked into git and is the source of truth
+— do not regenerate it from `magazines/*.html` on the fly, do not write to
+`/tmp/`.
+
+URLs are canonicalized via `scripts/canonical-url.sh` (lowercases host, strips
+`www.`, drops query/fragment, drops trailing slash, and collapses Sentry host
+variants `blog.sentry.io/X` ↔ `sentry.io/blog/X`). This is the lesson from
+issues 020 and 021, where the same Sentry article shipped twice because the
+agent picked the `sentry.io/blog/` host on Friday after the ledger only had
+the `blog.sentry.io/` form from Thursday.
 
 Before finalizing today's picks:
 
 ```bash
-# Reject any candidate whose URL is already in the ledger.
-grep -Fxf published-urls.txt <(printf '%s\n' "${CANDIDATE_URLS[@]}") && {
-  echo "REPEAT — drop these and pick replacements"; exit 1; }
+# Canonicalize candidates, then reject any already in the ledger.
+printf '%s\n' "${CANDIDATE_URLS[@]}" \
+  | scripts/canonical-url.sh \
+  | grep -Fxf published-urls.txt && {
+    echo "REPEAT — drop these and pick replacements"; exit 1; }
 ```
 
-Or, equivalently, for each candidate URL run `grep -Fx "<url>" published-urls.txt`
-— a match means it has shipped before and is out. Also reject candidates that
-are *the same story* reported from a different source (e.g. OpenAI's Codex
-announcement vs. Rundown's recap of it — one of them was already in issue 002,
-both are out). "Codex for (almost) everything" shipped in both issue 002 and
-003; the Copilot CLI ASCII-banner piece shipped in 014 and again in 016 — both
-were ledger failures.
+Or, equivalently, for each candidate run
+`scripts/canonical-url.sh "<url>" | grep -Fxf - published-urls.txt`
+— a match means it has shipped before and is out.
+
+**Cross-source dedup (the harder case).** Canonicalization only catches
+host-variant duplicates. It does NOT catch the same story reported from a
+genuinely different source: OpenAI's Codex announcement vs. Rundown's recap
+of it (both shipped, issue 002 and 003); the Copilot CLI ASCII-banner piece
+that shipped in 014 and again in 016; Sentry's
+`sentry.engineering/.../from-monkey-patching-to-tracing-channels` (issue 020)
+re-told as `sentry.io/blog/fixing-javascript-observability` (issue 021).
+
+To catch these, before finalizing read the TOC of the **last 3 issues**:
+
+```bash
+ls -t magazines/*.html | head -3 \
+  | xargs -I{} grep -hoE 'class="hed"[^>]*>[^<]+' {} \
+  | sed -E 's/.*">//'
+```
+
+If any candidate covers the same underlying news as a recent headline — even
+with a different URL, source, or framing ("RE: …", "more on …") — drop it.
 
 **Age cap — 30 days.** Each candidate's publication date must be within the
 last 30 days from `$ISSUE_DATE`. If the source page does not show a
@@ -122,11 +147,13 @@ failure — engineering-blog homepages still link old posts above the fold,
 and the agent grabbed it without checking.
 
 **After the issue is rendered (Step 4)** but before commit (Step 6), append
-today's read-on URLs to `published-urls.txt` and re-sort:
+today's read-on URLs to `published-urls.txt` (canonicalized) and re-sort:
 
 ```bash
 grep -hoE 'class="read-on"[^>]*href="[^"]+"' "magazines/$ISSUE_DATE.html" \
-  | grep -oE 'https://[^"]+' >> published-urls.txt
+  | grep -oE 'https://[^"]+' \
+  | scripts/canonical-url.sh \
+  >> published-urls.txt
 sort -u -o published-urls.txt published-urls.txt
 ```
 
