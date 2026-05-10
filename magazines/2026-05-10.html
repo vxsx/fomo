@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 022 · 10 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh; min-height: 100dvh;
+    position: relative; overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio, .spread > .main, .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px); line-height: 1.02;
+    letter-spacing: -0.02em; padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px); line-height: 1.45;
+    max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans);
+    font-weight: 600; font-size: 15px; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 14px 22px;
+    border: 2px solid currentColor; text-decoration: none;
+    color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px) 22px max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════ COVER · single-word mood ═══════════ */
+  .cover {
+    background: #0e0e10;
+    color: #f3efe6;
+  }
+  .cover .folio { opacity: 0.65; color: #f3efe6; }
+  .cover .mood {
+    font-family: var(--serif); font-weight: 900; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(80px, 18vw, 280px);
+    line-height: 0.86; letter-spacing: -0.045em;
+    color: #f3efe6;
+    padding-bottom: 0.16em; margin: 0;
+  }
+  .cover .mood .accent { color: #ffb13d; font-style: normal; font-weight: 800; }
+  .cover .dek {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(20px, 2vw, 30px); line-height: 1.35;
+    max-width: 32ch; opacity: 0.86;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px; padding-top: 22px;
+    border-top: 1px solid rgba(243,239,230,0.4); width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px; text-decoration: none; color: inherit;
+    padding: 7px 0; border-bottom: 1px dotted rgba(243,239,230,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #ffb13d; margin-right: 10px;
+  }
+  .cover .decor::before {
+    content: ""; position: absolute;
+    left: -8vw; top: -4vw; width: 70vw; height: 70vw;
+    background: radial-gradient(circle, rgba(255,177,61,0.10), transparent 65%);
+  }
+  @media (max-width: 800px) { .cover .toc { grid-template-columns: 1fr; gap: 0; } }
+
+  /* ═══════════ s01 · Risograph duotone ═══════════ */
+  .s01 {
+    background: #f4eedd;
+    color: #0a1a3a;
+  }
+  .s01 .tag { color: #d63a6a; border-color: #d63a6a; }
+  .s01 .hed {
+    font-family: var(--sans); font-weight: 900;
+    text-transform: uppercase; letter-spacing: -0.025em;
+    font-size: clamp(48px, 8vw, 120px); line-height: 0.94;
+    color: #0a1a3a;
+  }
+  .s01 .hed em {
+    font-style: normal; color: #d63a6a;
+    -webkit-text-stroke: 0;
+    text-shadow: 0.08em 0.08em 0 #0a1a3a;
+  }
+  .s01 .figure .pull {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: clamp(22px, 2.2vw, 32px); line-height: 1.3;
+    max-width: 40ch; color: #0a1a3a;
+    border-left: 6px solid #d63a6a; padding: 8px 0 8px 22px;
+  }
+  .s01 .read-on { color: #0a1a3a; border-color: #0a1a3a; --flip: #f4eedd; }
+  .s01 .decor::before, .s01 .decor::after {
+    content: ""; position: absolute; border-radius: 50%;
+    mix-blend-mode: multiply;
+  }
+  .s01 .decor::before {
+    right: -10vw; top: -8vw; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(214,58,106,0.34), transparent 70%);
+  }
+  .s01 .decor::after {
+    right: -7vw; top: -5vw; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(10,26,58,0.22), transparent 70%);
+  }
+
+  /* ═══════════ s02 · Newsprint (quiet) ═══════════ */
+  .s02 {
+    background: #f6f1e7;
+    color: #1a1a1a;
+  }
+  .s02 .folio { color: #1a1a1a; opacity: 0.8; }
+  .s02 .tag { color: #1a1a1a; border-color: #1a1a1a; font-family: var(--serif); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+  .s02 .hed {
+    font-family: var(--serif); font-weight: 700; font-style: normal;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-size: clamp(44px, 6vw, 92px); letter-spacing: -0.015em;
+  }
+  .s02 .hed em {
+    font-style: italic; font-weight: 700;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s02 .figure {
+    column-count: 3; column-gap: 28px;
+    font-family: var(--serif); font-size: 16px; line-height: 1.5;
+    color: #1a1a1a; max-width: 60ch;
+    border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a;
+    padding: 14px 0;
+  }
+  .s02 .figure p { margin: 0 0 10px; break-inside: avoid; }
+  .s02 .figure .smallcaps {
+    font-variant: small-caps; letter-spacing: 0.08em; font-weight: 600;
+  }
+  .s02 .read-on { color: #1a1a1a; border-color: #1a1a1a; --flip: #f6f1e7; }
+  @media (max-width: 800px) {
+    .s02 .figure { column-count: 1; }
+  }
+
+  /* ═══════════ s03 · Postcard (horizontal split) ═══════════ */
+  .s03 {
+    background: #d8e8e0;
+    color: #1f2a26;
+  }
+  .s03 .tag { color: #c84d2c; border-color: #c84d2c; }
+  .s03 .hed {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #1f2a26;
+  }
+  .s03 .hed .strike { color: #c84d2c; position: relative; display: inline-block; }
+  .s03 .hed .strike::after {
+    content: ""; position: absolute; left: -2%; right: -2%;
+    top: 52%; height: 0.12em; background: #c84d2c;
+    transform: rotate(-2deg);
+  }
+  .s03 .figure {
+    display: grid; grid-template-columns: 0.85fr 1fr; gap: 30px; align-items: stretch;
+    border: 1.5px solid #1f2a26; padding: 22px;
+    background: #f0eee0;
+  }
+  .s03 .figure .stamp {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #c84d2c;
+    border: 2px dashed #c84d2c; padding: 14px;
+    display: flex; flex-direction: column; gap: 8px;
+    align-self: stretch;
+  }
+  .s03 .figure .stamp b { color: #1f2a26; font-weight: 700; font-size: 18px; letter-spacing: 0.08em; }
+  .s03 .figure .body {
+    font-family: var(--serif); font-size: 18px; line-height: 1.5;
+    color: #1f2a26;
+  }
+  .s03 .figure .body ol { margin: 0; padding-left: 1.1em; }
+  .s03 .figure .body li { margin-bottom: 6px; }
+  .s03 .read-on { color: #c84d2c; border-color: #c84d2c; --flip: #d8e8e0; }
+  .s03 .decor::before {
+    content: ""; position: absolute;
+    right: -6vw; bottom: -8vw; width: 36vw; height: 36vw;
+    background: radial-gradient(circle, rgba(200,77,44,0.10), transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .s03 .figure { grid-template-columns: 1fr; gap: 18px; }
+  }
+
+  /* ═══════════ s04 · Spreadsheet (quiet, tabular) ═══════════ */
+  .s04 {
+    background: #ecedea;
+    color: #16181a;
+  }
+  .s04 .folio { color: #16181a; opacity: 0.7; }
+  .s04 .tag { color: #2a5b3e; border-color: #2a5b3e; font-family: var(--mono); letter-spacing: 0.14em; }
+  .s04 .hed {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(40px, 5.5vw, 84px);
+  }
+  .s04 .hed em { font-style: italic; color: #2a5b3e; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
+  .s04 .figure table {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--mono); font-size: 14px;
+    background: #f6f7f4; border: 1px solid #b6b9b3;
+  }
+  .s04 .figure th, .s04 .figure td {
+    border: 1px solid #c8cbc4; padding: 10px 12px; text-align: left; vertical-align: top;
+  }
+  .s04 .figure th {
+    background: #2a5b3e; color: #ecedea;
+    font-family: var(--sans); font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; font-size: 12px;
+  }
+  .s04 .figure tr:nth-child(even) td { background: #eef0eb; }
+  .s04 .figure td.tick { text-align: center; color: #2a5b3e; font-weight: 700; }
+  .s04 .figure td.miss { text-align: center; color: #b8b8b8; }
+  .s04 .read-on { color: #2a5b3e; border-color: #2a5b3e; --flip: #ecedea; }
+
+  /* ═══════════ s05 · Concrete / asymmetric (warm grey) ═══════════ */
+  .s05 {
+    background: #b8b3a8;
+    color: #1a1a18;
+  }
+  .s05 .folio { color: #1a1a18; }
+  .s05 .tag { color: #1a1a18; border-color: #1a1a18; }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(56px, 9vw, 140px);
+    line-height: 0.94;
+    color: #1a1a18;
+  }
+  .s05 .hed em {
+    font-style: normal; display: block;
+    font-family: var(--serif); font-weight: 300; font-style: italic;
+    color: #5a5247; font-size: 0.55em;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    margin-top: 0.1em;
+  }
+  .s05 .figure {
+    margin-left: auto; max-width: 28ch; text-align: right;
+  }
+  .s05 .figure .punct {
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(120px, 22vw, 280px);
+    line-height: 0.7; color: #1a1a18;
+    display: block;
+  }
+  .s05 .figure .caption {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #5a5247; margin-top: 4px;
+  }
+  .s05 .read-on { color: #1a1a18; border-color: #1a1a18; --flip: #b8b3a8; }
+
+  /* ═══════════ s06 · Blueprint ═══════════ */
+  .s06 {
+    background: #0a2a3e;
+    color: #cfe6f3;
+    --grid-line: rgba(207,230,243,0.13);
+  }
+  .s06 .folio { color: #cfe6f3; opacity: 0.7; }
+  .s06 .tag { color: #ffd267; border-color: #ffd267; font-family: var(--mono); letter-spacing: 0.16em; }
+  .s06 .hed {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(40px, 6.5vw, 100px); line-height: 1.0;
+    letter-spacing: -0.01em; color: #cfe6f3;
+  }
+  .s06 .hed em { color: #ffd267; font-style: normal; }
+  .s06 .figure {
+    font-family: var(--mono); font-size: 14px; line-height: 1.55;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(207,230,243,0.4);
+    padding: 18px 20px;
+    color: #cfe6f3;
+    max-width: 56ch; position: relative;
+  }
+  .s06 .figure::before {
+    content: ""; position: absolute; top: -1px; left: -8px; width: 16px; height: 16px;
+    border-top: 1px solid #ffd267; border-left: 1px solid #ffd267;
+  }
+  .s06 .figure::after {
+    content: ""; position: absolute; bottom: -1px; right: -8px; width: 16px; height: 16px;
+    border-bottom: 1px solid #ffd267; border-right: 1px solid #ffd267;
+  }
+  .s06 .figure .step { display: flex; gap: 14px; margin-bottom: 8px; }
+  .s06 .figure .step .n { color: #ffd267; font-weight: 600; min-width: 2ch; }
+  .s06 .read-on { color: #ffd267; border-color: #ffd267; --flip: #0a2a3e; }
+  .s06 .decor {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ═══════════ s07 · Neon / cyberpunk (loud) ═══════════ */
+  .s07 {
+    background: #0c0218;
+    color: #f0e8ff;
+  }
+  .s07 .folio { color: #f0e8ff; opacity: 0.8; }
+  .s07 .tag { color: #38f0ff; border-color: #38f0ff; font-family: var(--mono); letter-spacing: 0.18em; }
+  .s07 .hed {
+    font-family: var(--sans); font-weight: 900;
+    text-transform: uppercase; letter-spacing: -0.02em;
+    font-size: clamp(48px, 8vw, 130px); line-height: 0.95;
+    background: linear-gradient(95deg, #ff3df0 0%, #38f0ff 60%, #b18cff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255,61,240,0.18);
+  }
+  .s07 .figure {
+    font-family: var(--mono); font-size: 14px; line-height: 1.6;
+    border: 1.5px solid #38f0ff; padding: 18px 22px;
+    background: rgba(56,240,255,0.06);
+    color: #f0e8ff;
+    box-shadow: 0 0 24px rgba(56,240,255,0.18) inset;
+    max-width: 58ch;
+  }
+  .s07 .figure .prompt { color: #38f0ff; }
+  .s07 .figure .hl { color: #ff3df0; font-weight: 600; }
+  .s07 .read-on { color: #38f0ff; border-color: #38f0ff; --flip: #0c0218; }
+  .s07 .decor::before {
+    content: ""; position: absolute;
+    left: -10vw; bottom: -10vw; width: 70vw; height: 70vw;
+    background: radial-gradient(circle, rgba(177,140,255,0.22), transparent 65%);
+  }
+  .s07 .decor::after {
+    content: ""; position: absolute;
+    right: -8vw; top: -10vw; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(255,61,240,0.18), transparent 65%);
+  }
+
+  /* ═══════════ s08 · Dark report / classified (loud) ═══════════ */
+  .s08 {
+    background: #08070a;
+    color: #d6cfc6;
+  }
+  .s08 .folio { color: #d6cfc6; opacity: 0.7; }
+  .s08 .folio .stamp {
+    color: #c92626; border: 1.5px solid #c92626;
+    padding: 3px 8px; letter-spacing: 0.22em; font-weight: 700;
+    transform: rotate(-2deg);
+  }
+  .s08 .tag { color: #c92626; border-color: #c92626; font-family: var(--mono); letter-spacing: 0.18em; }
+  .s08 .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7.5vw, 120px); line-height: 0.98;
+    color: #d6cfc6;
+  }
+  .s08 .hed .redact {
+    background: #d6cfc6; color: transparent; padding: 0 0.18em;
+    user-select: none;
+  }
+  .s08 .hed em {
+    font-style: italic; color: #c92626;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s08 .figure {
+    font-family: var(--mono); font-size: 13px; line-height: 1.6;
+    border-top: 1px solid #c92626; border-bottom: 1px solid #c92626;
+    padding: 14px 0; max-width: 60ch; color: #d6cfc6;
+  }
+  .s08 .figure .row { display: flex; gap: 22px; padding: 4px 0; }
+  .s08 .figure .row .k { color: #c92626; min-width: 14ch; letter-spacing: 0.1em; text-transform: uppercase; }
+  .s08 .figure .bar {
+    background: #d6cfc6; color: transparent; user-select: none;
+    display: inline-block; padding: 0 0.2em;
+  }
+  .s08 .read-on { color: #c92626; border-color: #c92626; --flip: #08070a; }
+
+  /* ═══════════ s09 · Museum placard (centered, quiet) ═══════════ */
+  .s09 {
+    background: #ece6d4;
+    color: #2c3a26;
+  }
+  .s09 .folio { color: #2c3a26; opacity: 0.8; font-family: var(--serif); font-variant: small-caps; letter-spacing: 0.14em; }
+  .s09 .tag {
+    font-family: var(--serif); font-variant: small-caps;
+    letter-spacing: 0.18em; text-transform: none; font-weight: 600;
+    color: #2c3a26; border-color: #2c3a26;
+  }
+  .s09 .hed {
+    font-family: var(--serif); font-weight: 400; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(48px, 6.5vw, 96px);
+    letter-spacing: -0.01em; color: #2c3a26;
+  }
+  .s09 .figure .placard {
+    border-top: 1px solid #2c3a26; border-bottom: 1px solid #2c3a26;
+    padding: 14px 24px; max-width: 50ch;
+    font-family: var(--serif);
+    font-size: 16px; line-height: 1.55;
+    font-variant-numeric: oldstyle-nums;
+  }
+  .s09 .figure .placard .meta {
+    font-variant: small-caps; letter-spacing: 0.14em; font-size: 13px;
+    margin-bottom: 6px; opacity: 0.7;
+  }
+  .s09 .read-on {
+    color: #2c3a26; border-color: #2c3a26; --flip: #ece6d4;
+    font-family: var(--serif); font-variant: small-caps; letter-spacing: 0.14em; text-transform: none;
+  }
+
+  /* ═══════════ Colophon ═══════════ */
+  .colophon {
+    background: #f3efe6;
+    color: #1a1a1a;
+  }
+  .colophon .folio { color: #1a1a1a; opacity: 0.7; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 6vw, 88px);
+  }
+  .colophon .hed em {
+    font-style: italic; color: #c84d2c;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .sources {
+    font-family: var(--mono); font-size: 13px; line-height: 1.7;
+    columns: 2; column-gap: 36px; max-width: 64ch;
+    color: #1a1a1a;
+  }
+  .colophon .sources li { break-inside: avoid; list-style: none; }
+  .colophon .sources ul { padding: 0; margin: 0; }
+  .colophon .meta {
+    font-family: var(--sans); font-size: 13px; letter-spacing: 0.12em;
+    text-transform: uppercase; opacity: 0.7; margin-top: 14px;
+  }
+  @media (max-width: 800px) {
+    .colophon .sources { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ COVER ═══════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 022</span>
+    <span>Sun · 10 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <h1 class="mood">Disclos<span class="accent">ure</span>.</h1>
+    <p class="dek">Today's issue is about what you choose to show — ads with labels, training data with opt-outs, comp lists in spreadsheet form, and 4,000 declassified UFO files in markdown.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Ads, with a label.</span><span>OpenAI</span></a>
+      <a href="#s02"><span><span class="num">02</span>What ChatGPT remembers.</span><span>OpenAI</span></a>
+      <a href="#s03"><span><span class="num">03</span>Stop subtweeting your rivals.</span><span>PostHog</span></a>
+      <a href="#s04"><span><span class="num">04</span>Five real-time stacks, one sheet.</span><span>PostHog</span></a>
+      <a href="#s05"><span><span class="num">05</span>Watching the agents.</span><span>Sentry</span></a>
+      <a href="#s06"><span><span class="num">06</span>Specs first, agents second.</span><span>via @seeallochnaya</span></a>
+      <a href="#s07"><span><span class="num">07</span>Genternet rewrites the web.</span><span>via @denissexy</span></a>
+      <a href="#s08"><span><span class="num">08</span>4,000 UFO files in markdown.</span><span>via @denissexy</span></a>
+      <a href="#s09"><span><span class="num">09</span>Truth, as a growth strategy.</span><span>Bullas</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s01 ═══════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 022</span>
+    <span>01 / 09 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Strategy · Product</span>
+    <h2 class="hed">Ads, <em>with a label</em>.</h2>
+    <p class="lede">OpenAI is testing limited advertising inside ChatGPT, promising clear labelling, answer independence, and "strong privacy protections" to support free-tier access. Whether that survives contact with revenue targets is the test the next two quarters will run.</p>
+    <div class="figure">
+      <p class="pull">"Answers stay independent. Ads are clearly labelled. Privacy is preserved." — three claims a paid model would never have to make.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/testing-ads-in-chatgpt" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s02 ═══════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 022</span>
+    <span>02 / 09 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Privacy · Policy</span>
+    <h2 class="hed">What ChatGPT learns about <em>you</em> — and what you can keep.</h2>
+    <p class="lede">OpenAI walks through what it stores, what it strips before training, and how to opt your conversations out. The doc is specific enough to act on tonight, not just bookmark.</p>
+    <div class="figure">
+      <p><span class="smallcaps">Stored.</span> Conversation text, model responses, account metadata, and per-message feedback. Retention windows differ by tier; enterprise data is excluded from training by default.</p>
+      <p><span class="smallcaps">Stripped.</span> The training pipeline runs deduplication, classifier-based PII removal, and topic-based filtering before a single token reaches the next checkpoint.</p>
+      <p><span class="smallcaps">Yours.</span> Plus and Free users can disable "improve the model for everyone" in privacy settings; temporary chats skip retention entirely. Worth one minute, once.</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/how-chatgpt-protects-privacy" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s03 ═══════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 022</span>
+    <span>03 / 09 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Founders · Marketing</span>
+    <h2 class="hed">Stop <span class="strike">subtweeting</span> your rivals.</h2>
+    <p class="lede">Public competitor takedowns reach the people who already love you and inadvertently introduce the rival to everyone else. PostHog's playbook is the un-glamorous one: honest comparisons, bid on the keywords, and put the energy back in the product.</p>
+    <div class="figure">
+      <div class="stamp">
+        <span>Postmark</span>
+        <b>NOT&nbsp;SENT</b>
+        <span>Re: that smug LinkedIn carousel about $COMPETITOR</span>
+      </div>
+      <div class="body">
+        <ol>
+          <li>Write the honest comparison page yourself; link to their docs.</li>
+          <li>Bid on their brand keywords — quietly, not vindictively.</li>
+          <li>Ship the missing feature; outcomes outlive screenshots.</li>
+          <li>Praise them in public when they're right; readers notice.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/why-attacking-competitors-is-dumb" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s04 ═══════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 022</span>
+    <span>04 / 09 · PostHog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Tools · Analytics</span>
+    <h2 class="hed">Five real-time stacks, <em>one sheet</em>.</h2>
+    <p class="lede">PostHog lines itself up against GA4, Plausible, Fathom, and Matomo on live dashboards, identified-user tracking, and replay. Read it once before you re-pick your default analytics — the picks have shifted since 2024.</p>
+    <div class="figure">
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Live dash</th><th>Identified users</th><th>Replay</th><th>Self-host</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>PostHog</td><td class="tick">●</td><td class="tick">●</td><td class="tick">●</td><td class="tick">●</td></tr>
+          <tr><td>GA4</td><td class="tick">●</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr>
+          <tr><td>Plausible</td><td class="tick">●</td><td class="miss">○</td><td class="miss">○</td><td class="tick">●</td></tr>
+          <tr><td>Fathom</td><td class="tick">●</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr>
+          <tr><td>Matomo</td><td class="tick">●</td><td class="tick">●</td><td class="miss">○</td><td class="tick">●</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://posthog.com/blog/best-real-time-analytics-platforms" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s05 ═══════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 022</span>
+    <span>05 / 09 · Sentry</span>
+  </header>
+  <div class="main">
+    <span class="tag">Observability · Agents</span>
+    <h2 class="hed">Watching the agents.<em>A developer's handbook.</em></h2>
+    <p class="lede">Sentry's guide to AI-agent monitoring is built for the people writing the agent loops, not for an auditor reading them after the fact. What to trace, what to alert on, and which compliance frameworks get it wrong.</p>
+    <div class="figure">
+      <span class="punct">?</span>
+      <span class="caption">Trace the question, not the answer</span>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.sentry.io/ai-agent-observability-developers-guide-to-agent-monitoring/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s06 ═══════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 022</span>
+    <span>06 / 09 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Workflow · Agents</span>
+    <h2 class="hed">Specs first, <em>agents second.</em></h2>
+    <p class="lede">A growing camp of engineers writes a markdown spec, hands it to Claude or Codex, and reviews the patch — not the prose. OpenSpec documents the workflow as a small, opinionated convention you can adopt this afternoon.</p>
+    <div class="figure">
+      <div class="step"><span class="n">01</span><span><b>spec/</b> — one markdown file per change. State what, not how.</span></div>
+      <div class="step"><span class="n">02</span><span><b>agent run</b> — agent reads the spec, drafts the patch, opens a PR.</span></div>
+      <div class="step"><span class="n">03</span><span><b>human review</b> — you read code, not natural-language summaries.</span></div>
+      <div class="step"><span class="n">04</span><span><b>archive/</b> — merged specs live next to the diffs they produced.</span></div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s07 ═══════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 022</span>
+    <span>07 / 09 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative · Tooling</span>
+    <h2 class="hed">Genternet rewrites the web in real time.</h2>
+    <p class="lede">A Chrome extension that intercepts whatever you load and regenerates it through a fast image model and Gemini Flash-Lite. Two cents a page, fully open source, and the gag is also the demo: the medium is no longer the message.</p>
+    <div class="figure">
+      <div><span class="prompt">$</span> genternet → <span class="hl">grok-imagine-image</span> · <span class="hl">$0.02 / page</span></div>
+      <div><span class="prompt">$</span> stack: chrome ext + gemini 3.1 flash-lite + diffusion image gen</div>
+      <div><span class="prompt">$</span> source: github.com/DenisSergeevitch/genternet-chrome</div>
+      <div><span class="prompt">$</span> verdict: an art piece that happens to be installable</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s08 ═══════════ -->
+<section class="spread s08" id="s08">
+  <header class="folio">
+    <span>Ephemeris · Issue 022</span>
+    <span>08 / 09 · via @denissexy <span class="stamp">DECLASSIFIED</span></span>
+  </header>
+  <div class="main">
+    <span class="tag">Datasets · Curiosities</span>
+    <h2 class="hed"><span class="redact">████</span> declassified UFO files, in <em>markdown</em>.</h2>
+    <p class="lede">Denis Sergeevitch converted the U.S. government's released UFO archive — 4,000+ documents — into a clean markdown corpus and asked GPT-5.5 Pro to weigh in. Use it as a long-context reasoning eval; ignore the percentages.</p>
+    <div class="figure">
+      <div class="row"><span class="k">Files</span><span>4,063 markdown documents, structured by report-id.</span></div>
+      <div class="row"><span class="k">Source</span><span>U.S. <span class="bar">██████</span> declassification project, 1947–2024.</span></div>
+      <div class="row"><span class="k">Eval use</span><span>Long-context retrieval; entity dedupe; date-extraction stress.</span></div>
+      <div class="row"><span class="k">License</span><span>Public domain. Repo: github.com/DenisSergeevitch/UFO-USA.</span></div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/DenisSergeevitch/UFO-USA" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ s09 ═══════════ -->
+<section class="spread s09 centered" id="s09">
+  <header class="folio">
+    <span>Ephemeris · Issue 022</span>
+    <span>09 / 09 · Bullas</span>
+  </header>
+  <div class="main">
+    <span class="tag">Business · Strategy</span>
+    <h2 class="hed">Truth, as a <em>growth strategy.</em></h2>
+    <p class="lede">Bullas argues authenticity has graduated from brand attribute to competitive moat — and that performative messaging is now a measurable drag on growth. A useful pressure check on whatever copy you most recently published.</p>
+    <div class="figure">
+      <div class="placard">
+        <div class="meta">Object · 2026.05 · Editorial</div>
+        Truth is no longer the thing you put in the footnotes — it is the proposition itself. The companies that win the next decade tell the public what they are doing while they do it, and trust accumulates as a balance sheet item.
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.jeffbullas.com/truth-business-growth-strategy/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════ Colophon ═══════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 022</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Nine picks, six sources, one throughline: what you choose to show. Today's feed leaned on the official OpenAI and PostHog blogs, Sentry's engineering site, two Telegram channels, and a long-running marketing essayist.</p>
+    <div class="figure">
+      <ul class="sources">
+        <li>· OpenAI · openai.com/news</li>
+        <li>· PostHog · posthog.com/blog</li>
+        <li>· Sentry · blog.sentry.io</li>
+        <li>· @seeallochnaya · t.me/seeallochnaya</li>
+        <li>· @denissexy · t.me/denissexy</li>
+        <li>· Jeff Bullas · jeffbullas.com</li>
+      </ul>
+      <div class="meta">Rubric: AI tools you could adopt this week · creative software · dev tools &amp; agents · privacy &amp; security · research with a practical kernel · anything immediately actionable.</div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
