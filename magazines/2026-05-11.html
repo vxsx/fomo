@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 023 · Mon 11 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════ LOCKED BASELINE ═══════════════════ */
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px; line-height: 1.55;
+    background: #0b0b0b; color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh; min-height: 100dvh;
+    position: relative; overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor;
+    border-radius: 999px; opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans);
+    font-weight: 600; font-size: 15px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor; --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════ COVER — single-word mood ═══════════════════ */
+  .cover { background: #ece4d2; color: #161616; }
+  .cover .mood {
+    font-family: var(--serif);
+    font-weight: 900; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(72px, 22vw, 320px);
+    line-height: 0.84; letter-spacing: -0.04em;
+    color: #161616; padding-bottom: 0.06em; margin: 0;
+    word-break: break-word;
+  }
+  .cover .mood .dot { color: #b23a1a; }
+  .cover .stamp {
+    font-family: var(--mono); font-weight: 600;
+    font-size: 12px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: #b23a1a;
+  }
+  .cover .toc {
+    display: grid; grid-template-columns: 1fr;
+    gap: 0; padding-top: 18px;
+    border-top: 1px solid #161616; width: 100%;
+    max-width: 760px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(22,22,22,0.35);
+    font-family: var(--serif); font-size: 17px;
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child {
+    flex: 0 0 auto; font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; opacity: 0.72;
+  }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600; font-style: normal;
+    font-size: 12px; letter-spacing: 0.12em;
+    color: #b23a1a; margin-right: 14px;
+  }
+
+  /* ═══════════════════ s01 — Editorial cream / pull-quote ═══════════════════ */
+  .s01 { background: #f3ead7; color: #1a1a1a; }
+  .s01 .tag { color: #6b1f14; border-color: #6b1f14; }
+  .s01 .hed em {
+    font-style: italic;
+    color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s01 .read-on { color: #6b1f14; border-color: #6b1f14; --flip: #f3ead7; }
+  .s01 .quote {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: clamp(22px, 2.4vw, 34px);
+    line-height: 1.35;
+    border-left: 3px solid #6b1f14;
+    padding: 6px 0 6px 22px;
+    color: #1a1a1a;
+    max-width: 36ch;
+  }
+  .s01 .attr {
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: #6b1f14; margin-top: 12px;
+  }
+  .s01 .decor::before {
+    content: "";
+    position: absolute;
+    right: -6vw; bottom: -14vw;
+    width: 56vw; height: 56vw;
+    background: radial-gradient(circle, rgba(107,31,20,0.10), transparent 70%);
+  }
+  .s01 .decor::after {
+    content: "“";
+    position: absolute;
+    top: clamp(60px, 8vw, 110px);
+    right: clamp(24px, 6vw, 120px);
+    font-family: var(--serif); font-style: italic;
+    font-weight: 900;
+    font-size: clamp(180px, 28vw, 420px);
+    line-height: 0.7;
+    color: rgba(107,31,20,0.10);
+    pointer-events: none;
+  }
+
+  /* ═══════════════════ s02 — Dark report ═══════════════════ */
+  .s02 { background: #110404; color: #e8d8d2; }
+  .s02 .tag { color: #f04a3a; border-color: #f04a3a; font-family: var(--mono); }
+  .s02 .hed {
+    font-family: var(--sans); font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(44px, 6.4vw, 92px);
+    line-height: 0.96; letter-spacing: -0.015em;
+    color: #f5e9e4;
+  }
+  .s02 .hed em { font-style: normal; color: #f04a3a; }
+  .s02 .hed .redact {
+    background: #f04a3a; color: #110404;
+    padding: 0 0.18em; margin: 0 0.04em;
+    border-radius: 2px;
+  }
+  .s02 .read-on { color: #f04a3a; border-color: #f04a3a; --flip: #110404; }
+  .s02 .stat {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 18px 28px; align-items: end;
+    padding: 22px 0;
+    border-top: 1px solid #4a1a14;
+    border-bottom: 1px solid #4a1a14;
+  }
+  .s02 .stat .num {
+    font-family: var(--serif); font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-size: clamp(96px, 16vw, 220px);
+    line-height: 0.86;
+    color: #f04a3a;
+    letter-spacing: -0.04em;
+    padding-bottom: 0.04em;
+  }
+  .s02 .stat .num .x {
+    font-family: var(--sans); font-weight: 700;
+    font-style: normal; font-size: 0.32em;
+    letter-spacing: normal;
+    margin-left: 0.18em;
+    color: #e8d8d2;
+    vertical-align: 0.6em;
+  }
+  .s02 .stat .body {
+    font-family: var(--mono); font-size: 13px;
+    color: #b89a92; line-height: 1.55;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    max-width: 36ch;
+  }
+  .s02 .bars { margin-top: 18px; font-family: var(--mono); font-size: 12px; color: #b89a92; }
+  .s02 .bars .row { display: flex; align-items: center; gap: 14px; padding: 4px 0; }
+  .s02 .bars .row .lbl { width: 16ch; color: #e8d8d2; }
+  .s02 .bars .row .bar { height: 12px; background: #f04a3a; }
+  .s02 .bars .row .bar.dim { background: #6a2520; }
+  .s02 .decor::before {
+    content: "CLASSIFICATION · INTERNAL · DRAFT";
+    position: absolute;
+    top: clamp(72px, 9vw, 120px); right: 24px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.3em; color: #6a2520;
+  }
+  @media (max-width: 800px) {
+    .s02 .stat { grid-template-columns: 1fr; gap: 12px; }
+    .s02 .bars .row .lbl { width: 12ch; }
+    .s02 .decor::before { display: none; }
+  }
+
+  /* ═══════════════════ s03 — Terminal ═══════════════════ */
+  .s03 { background: #050a06; color: #7cf0a5; }
+  .s03 .folio { color: #4cb677; opacity: 0.85; }
+  .s03 .tag {
+    color: #7cf0a5; border-color: #7cf0a5;
+    font-family: var(--mono); font-size: 11px;
+    border-radius: 0;
+  }
+  .s03 .hed {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(34px, 4.6vw, 64px);
+    letter-spacing: -0.005em;
+    line-height: 1.08;
+    color: #c5fbd5;
+  }
+  .s03 .hed em {
+    font-style: normal; color: #050a06;
+    background: #7cf0a5; padding: 0 0.15em;
+  }
+  .s03 .lede { font-family: var(--mono); font-size: 16px; color: #9ddcaf; }
+  .s03 .read-on { color: #7cf0a5; border-color: #7cf0a5; --flip: #050a06; }
+  .s03 .term {
+    background: #08110b;
+    border: 1px solid #1f3a26;
+    padding: 18px 22px;
+    font-family: var(--mono); font-size: 13px;
+    color: #9ddcaf; line-height: 1.7;
+    overflow-x: auto;
+    box-shadow: inset 0 0 60px rgba(0,255,140,0.04);
+  }
+  .s03 .term .p { color: #4cb677; }
+  .s03 .term .ok { color: #7cf0a5; }
+  .s03 .term .warn { color: #f0c14c; }
+  .s03 .term .deny { color: #f04a4a; }
+  .s03 .term .blink::after {
+    content: "▍"; color: #7cf0a5;
+    margin-left: 4px;
+    animation: blink 1s steps(2) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .s03 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0, transparent 3px,
+      rgba(124,240,165,0.04) 3px, rgba(124,240,165,0.04) 4px
+    );
+  }
+  .s03 .decor::after {
+    content: "tty1 · sandbox · 02:14:08";
+    position: absolute;
+    bottom: 24px; left: clamp(24px, 6vw, 120px);
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; color: #2f6a40;
+  }
+
+  /* ═══════════════════ s04 — Neo-brutalist yellow ═══════════════════ */
+  .s04 { background: #f7d600; color: #0a0a0a; }
+  .s04 .tag {
+    color: #f7d600; border-color: #0a0a0a;
+    font-family: var(--sans); font-weight: 700;
+    border-radius: 0; border-width: 2px;
+    background: #0a0a0a;
+  }
+  .s04 .hed {
+    font-family: var(--sans); font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(48px, 7.2vw, 104px);
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+    color: #0a0a0a;
+  }
+  .s04 .hed em {
+    font-style: normal;
+    background: #0a0a0a; color: #f7d600;
+    padding: 0 0.12em; margin-right: 0.04em;
+    display: inline-block;
+  }
+  .s04 .lede { font-family: var(--sans); font-weight: 500; }
+  .s04 .read-on {
+    color: #f7d600; background: #0a0a0a;
+    border-color: #0a0a0a; border-width: 3px;
+    --flip: #0a0a0a;
+  }
+  .s04 .read-on:hover { background: #f7d600; }
+  .s04 .read-on:hover span { color: #0a0a0a; }
+  .s04 .meter {
+    display: grid; grid-template-columns: 1fr;
+    gap: 0;
+    border: 3px solid #0a0a0a;
+    background: #f7d600;
+  }
+  .s04 .meter .row {
+    display: grid;
+    grid-template-columns: 12ch 1fr 8ch;
+    gap: 0;
+    border-bottom: 2px solid #0a0a0a;
+    align-items: stretch;
+  }
+  .s04 .meter .row:last-child { border-bottom: 0; }
+  .s04 .meter .lbl {
+    padding: 10px 14px;
+    font-family: var(--sans); font-weight: 800;
+    text-transform: uppercase; font-size: 13px;
+    letter-spacing: 0.04em;
+    border-right: 2px solid #0a0a0a;
+    color: #0a0a0a;
+  }
+  .s04 .meter .barwrap { padding: 4px; }
+  .s04 .meter .bar {
+    background: #0a0a0a;
+    height: 100%;
+  }
+  .s04 .meter .bar.b1 { width: 14%; }
+  .s04 .meter .bar.b2 { width: 38%; }
+  .s04 .meter .bar.b3 { width: 72%; }
+  .s04 .meter .num {
+    padding: 10px 14px;
+    font-family: var(--sans); font-weight: 800;
+    font-size: 14px;
+    text-align: right;
+    border-left: 2px solid #0a0a0a;
+    color: #0a0a0a;
+  }
+  .s04 .stamp {
+    display: inline-block;
+    background: #0a0a0a; color: #f7d600;
+    font-family: var(--mono); font-weight: 600;
+    font-size: 12px; letter-spacing: 0.18em;
+    padding: 6px 12px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 800px) {
+    .s04 .meter .row { grid-template-columns: 9ch 1fr 7ch; }
+    .s04 .meter .lbl { font-size: 11px; padding: 8px 10px; }
+    .s04 .meter .num { font-size: 12px; padding: 8px 10px; }
+  }
+
+  /* ═══════════════════ s05 — Midnight infrastructure ═══════════════════ */
+  .s05 { background: #0a1530; color: #cfdcf2; }
+  .s05 .folio { color: #6e8ec4; }
+  .s05 .tag {
+    color: #6cf0ec; border-color: #6cf0ec;
+    font-family: var(--mono);
+  }
+  .s05 .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(46px, 6.6vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, #ffffff 0%, #cfdcf2 60%, #6cf0ec 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .s05 .hed em {
+    font-style: italic;
+    -webkit-text-fill-color: initial; color: #6cf0ec;
+    background: none;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s05 .lede { color: #b8c8e0; }
+  .s05 .read-on { color: #6cf0ec; border-color: #6cf0ec; --flip: #0a1530; }
+  .s05 .figure { display: grid; gap: 22px; }
+  .s05 .bignum {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 28px; align-items: end;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #1f3358;
+  }
+  .s05 .bignum .n {
+    font-family: var(--serif); font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-size: clamp(96px, 18vw, 240px);
+    line-height: 0.84;
+    color: #6cf0ec;
+    letter-spacing: -0.04em;
+    padding-bottom: 0.04em;
+  }
+  .s05 .bignum .n .unit {
+    font-family: var(--sans); font-weight: 700; font-style: normal;
+    font-size: 0.22em;
+    letter-spacing: normal;
+    margin-left: 0.32em;
+    color: #cfdcf2;
+    vertical-align: 0.6em;
+  }
+  .s05 .bignum .body {
+    font-family: var(--mono); font-size: 13px;
+    color: #8da4cc; line-height: 1.55;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    max-width: 30ch;
+    padding-bottom: 14px;
+  }
+  .s05 .specs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px 28px;
+    font-family: var(--mono); font-size: 12px;
+    color: #8da4cc;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .s05 .specs .lbl { color: #6e8ec4; font-size: 11px; padding-bottom: 4px; }
+  .s05 .specs .val { color: #cfdcf2; font-size: 14px; letter-spacing: 0.04em; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(108,240,236,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(108,240,236,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at top right, #000 10%, transparent 70%);
+  }
+  @media (max-width: 800px) {
+    .s05 .bignum { grid-template-columns: 1fr; gap: 10px; }
+    .s05 .specs { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════════════ COLOPHON — newsprint ═══════════════════ */
+  .colophon { background: #f0eada; color: #161616; }
+  .colophon .folio { color: #444; }
+  .colophon .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(40px, 5.4vw, 76px);
+    color: #161616;
+  }
+  .colophon .hed em {
+    font-style: italic; color: #7a1d10;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede { font-family: var(--serif); max-width: 60ch; }
+  .colophon .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 32px;
+    border-top: 2px solid #161616;
+    padding-top: 14px;
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.06em;
+    color: #444; text-transform: uppercase;
+  }
+  .colophon .grid b { color: #161616; font-weight: 600; }
+  @media (max-width: 800px) {
+    .colophon .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════ COVER ═══════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 023</span>
+    <span>Mon · 11 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <span class="stamp">Mood of the day</span>
+    <h1 class="mood">Autonomous<span class="dot">.</span></h1>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Design systems are now inference systems.</span><span>Hoang · via @ProductsAndStartups</span></a>
+      <a href="#s02"><span><span class="num">02</span>AI-only code shipped 9× more vulnerabilities.</span><span>Stanford · via @ProductsAndStartups</span></a>
+      <a href="#s03"><span><span class="num">03</span>A sandboxed browser the agent can read but not steal from.</span><span>via @denissexy</span></a>
+      <a href="#s04"><span><span class="num">04</span>Will your Show HN flop? 150,000 posts say so.</span><span>via @denissexy</span></a>
+      <a href="#s05"><span><span class="num">05</span>Five gigawatts of Trainium. Claude on AWS Bedrock.</span><span>Anthropic</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════════ s01 — Editorial cream / pull-quote ═══════════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 023</span>
+    <span>01 / 05 · Proof of Concept</span>
+  </header>
+  <div class="main">
+    <span class="tag">Design · Systems</span>
+    <h2 class="hed">Your design system is now an <em>inference system</em>.</h2>
+    <p class="lede">David Hoang argues design systems have stopped serving humans. Their new audience is the model that assembles a UI on the fly: components must convey intent, not aesthetics; documentation must be machine-readable; governance becomes a feedback loop, not a review meeting. Adoption is the wrong metric — measure adaption, how the system evolves under live pressure.</p>
+    <div class="figure">
+      <blockquote class="quote">"Components stop being parts and start being parameters. The model picks the geometry; the system supplies the constraints."</blockquote>
+      <p class="attr">— David Hoang · 26 Apr 2026</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.proofofconcept.pub/p/design-systems-are-now-inference" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s02 — Dark report ═══════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 023</span>
+    <span>02 / 05 · Stanford via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Research</span>
+    <h2 class="hed">When the human stops <em>reading</em>, the bugs stop <span class="redact">hiding</span>.</h2>
+    <p class="lede">Stanford instrumented six thousand coding sessions and found a clean step-function: code generated by an autonomous agent and shipped without a human in the loop carried roughly nine times more security defects than code where a human and the model went back and forth. The kicker — pure-AI code is also more likely to land, because nobody is pushing back.</p>
+    <div class="figure">
+      <div class="stat">
+        <div class="num">9<span class="x">×</span></div>
+        <div class="body">Vulnerabilities per 1k lines of shipped code, agent-only mode vs. human-in-the-loop. n = 6,000 sessions.</div>
+      </div>
+      <div class="bars">
+        <div class="row"><span class="lbl">Human + AI</span><span class="bar dim" style="width: 8%"></span><span>1×</span></div>
+        <div class="row"><span class="lbl">AI only</span><span class="bar" style="width: 72%"></span><span>9×</span></div>
+        <div class="row"><span class="lbl">Survives to commit</span><span class="bar" style="width: 44%"></span><span>44%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://arxiv.org/abs/2604.20779" target="_blank" rel="noopener"><span>Read the paper →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s03 — Terminal ═══════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 023</span>
+    <span>03 / 05 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">[ DEV TOOLS · AGENTS ]</span>
+    <h2 class="hed">Hand the agent a <em>browser</em>. Keep the cookies.</h2>
+    <p class="lede">ChatGPT Portal is a tiny local bridge: your authenticated browser session stays on your laptop, the agent gets a sanitised text snapshot of the page it asked to see. It can read your inbox, your bank, your private GitHub — but it cannot click submit, change a setting, or exfiltrate a token.</p>
+    <div class="figure">
+      <div class="term">
+<span class="p">$</span> portal start --port 7331
+<span class="ok">▸ bridge online · 127.0.0.1:7331</span>
+<span class="ok">▸ session cookies stay in browser · agent sees text only</span>
+
+<span class="p">agent&gt;</span> open https://mail.example.com/inbox
+<span class="ok">[ok]</span>  rendered → 12,418 chars · 4 unread threads
+<span class="warn">[note]</span> form submission · <span class="deny">DENIED</span> by policy
+<span class="warn">[note]</span> outbound POST · <span class="deny">DENIED</span> by policy
+
+<span class="p">agent&gt;</span> summarise unread invoices<span class="blink"></span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/DenisSergeevitch/chatgpt-portal" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s04 — Neo-brutalist yellow ═══════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 023</span>
+    <span>04 / 05 · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Side Projects · ML</span>
+    <h2 class="hed"><em>150,000</em> Show HN posts. Now your title gets a verdict.</h2>
+    <p class="lede">A new tool ingests every Show HN since the section's first day, embeds the titles, and learns what predicts upvotes. Paste your draft launch and it returns a forecast: expected karma, comment count, and three rewordings it thinks will outperform yours. Either it is right, or it teaches you something about how the audience reads.</p>
+    <div class="figure">
+      <div class="meter">
+        <div class="row">
+          <div class="lbl">Title A</div>
+          <div class="barwrap"><div class="bar b1"></div></div>
+          <div class="num">14 ↑</div>
+        </div>
+        <div class="row">
+          <div class="lbl">Title B</div>
+          <div class="barwrap"><div class="bar b2"></div></div>
+          <div class="num">38 ↑</div>
+        </div>
+        <div class="row">
+          <div class="lbl">Title C</div>
+          <div class="barwrap"><div class="bar b3"></div></div>
+          <div class="num">72 ↑</div>
+        </div>
+      </div>
+      <p style="margin-top:18px;"><span class="stamp">Test before you post</span></p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://hackernews.foresyn.ai/" target="_blank" rel="noopener"><span>Try it →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ s05 — Midnight infrastructure ═══════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 023</span>
+    <span>05 / 05 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infrastructure · Capacity</span>
+    <h2 class="hed">Five gigawatts of Trainium, and Claude lands inside <em>Bedrock</em>.</h2>
+    <p class="lede">Anthropic and Amazon committed to up to five gigawatts of compute over the next decade and roughly a million Trainium2 chips already in the cluster. The bit that matters for builders: the full Claude Platform arrives inside AWS Bedrock with the same account, same controls, same billing — no second contract, no second key vault.</p>
+    <div class="figure">
+      <div class="bignum">
+        <div class="n">5<span class="unit">GW</span></div>
+        <div class="body">Total commitment over the next decade. Trainium2 in Q2 · Trainium3 later in the year · ~1 GW online by year-end.</div>
+      </div>
+      <div class="specs">
+        <div><div class="lbl">Chips today</div><div class="val">&gt;1,000,000 Trainium2</div></div>
+        <div><div class="lbl">Run-rate revenue</div><div class="val">$30B (was $9B in 2025)</div></div>
+        <div><div class="lbl">Where it lands</div><div class="val">AWS Bedrock · unified billing</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/anthropic-amazon-compute" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════ COLOPHON ═══════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 023</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">A Monday on autonomy. A piece of design philosophy from Hoang, a piece of Stanford research that ought to slow somebody down, two small dev tools surfaced via @denissexy, and the AWS deal that quietly changes where Claude lives.</p>
+    <div class="figure">
+      <div class="grid">
+        <div><b>Sources</b><br>proofofconcept.pub · arxiv.org · github · foresyn.ai · anthropic.com</div>
+        <div><b>Rubric</b><br>Tools you could adopt this week · research with a kernel · agentic dev tools · capacity</div>
+        <div><b>Issue</b><br>023 · Mon 11 May 2026 · Zürich</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

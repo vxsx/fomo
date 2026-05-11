@@ -10,6 +10,7 @@ https://anthropic.com/engineering/harness-design-long-running-apps
 https://anthropic.com/engineering/infrastructure-noise
 https://anthropic.com/engineering/managed-agents
 https://anthropic.com/features/project-deal
+https://anthropic.com/news/anthropic-amazon-compute
 https://anthropic.com/news/claude-design-anthropic-labs
 https://anthropic.com/news/claude-for-creative-work
 https://anthropic.com/news/claude-opus-4-7
@@ -17,6 +18,7 @@ https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
 https://anthropic.com/research/claude-personal-guidance
 https://arxiv.org/abs/2509.00462
+https://arxiv.org/abs/2604.20779
 https://arxiv.org/pdf/2604.24827
 https://blog.cloudflare.com/agent-readiness
 https://blog.cloudflare.com/agents-stripe-projects
@@ -67,10 +69,12 @@ https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/aut
 https://github.com/BayramAnnakov/factory-agent
 https://github.com/BayramAnnakov/token-audit-skill
 https://github.com/deepseek-ai/Thinking-with-Visual-Primitives
+https://github.com/DenisSergeevitch/chatgpt-portal
 https://github.com/DenisSergeevitch/genternet-chrome
 https://github.com/DenisSergeevitch/UFO-USA
 https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
+https://hackernews.foresyn.ai/
 https://higgsfield.ai/mcp
 https://huggingface.co/collections/talkie-lm/talkie-13b
 https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
@@ -118,6 +122,7 @@ https://posthog.com/blog/untangling-rayon-and-tokio
 https://posthog.com/blog/why-attacking-competitors-is-dumb
 https://posthog.com/blog/your-lifecycle-emails-are-wrong
 https://programbench.com/
+https://proofofconcept.pub/p/design-systems-are-now-inference
 https://sentry.engineering/blog/building-type-safe-metrics-api-in-swift-part-ii
 https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app
 https://sentry.engineering/blog/from-monkey-patching-to-tracing-channels
