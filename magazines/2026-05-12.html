@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 024 · 12 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute; inset: 0;
+    z-index: 0; pointer-events: none; overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     COVER — pull-quote treatment, masthead demoted to a corner line.
+     ═══════════════════════════════════════════════════════════════════ */
+  .cover { background: #f5efe2; color: #0f0f0f; }
+  .cover .folio { opacity: 1; }
+  .cover .folio .mark {
+    font-family: var(--serif); font-weight: 800; font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: 18px; letter-spacing: -0.01em; text-transform: none;
+    color: #4a2316;
+  }
+  .cover .pq {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(40px, 6.4vw, 96px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    color: #14140e;
+    margin: 0;
+    padding-bottom: 0.14em;
+  }
+  .cover .pq .lift { color: #4a2316; }
+  .cover .pq .quotemark {
+    display: block;
+    font-size: 1.6em; line-height: 0.6;
+    color: #4a2316;
+    opacity: 0.5;
+    margin-bottom: 0.05em;
+  }
+  .cover .attrib {
+    font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #4a2316;
+    border-top: 1px solid rgba(74,35,22,0.35);
+    padding-top: 14px;
+    max-width: 36ch;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(0,0,0,0.25);
+    font-size: 14px;
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.65; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #4a2316; margin-right: 8px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s01 — MUSEUM PLACARD (centered, ivory + dark olive, precise)
+     ═══════════════════════════════════════════════════════════════════ */
+  .s01 { background: #ece2cc; color: #1d2316; }
+  .s01 .folio { color: #3a4423; }
+  .s01 .tag {
+    color: #3a4423; border-color: #3a4423;
+    background: transparent;
+    font-family: var(--sans); font-weight: 600;
+  }
+  .s01 .hed {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 0;
+    font-size: clamp(46px, 6.6vw, 96px);
+    letter-spacing: -0.01em;
+    color: #14180c;
+  }
+  .s01 .hed em {
+    font-style: normal;
+    font-weight: 600;
+    color: #3a4423;
+    font-variation-settings: "opsz" 144, "SOFT" 0;
+  }
+  .s01 .lede { color: #2a3220; max-width: 56ch; }
+  .s01 .placard {
+    border: 1px solid rgba(58,68,35,0.4);
+    padding: 28px 36px;
+    background: rgba(255,255,255,0.35);
+    max-width: 580px;
+    width: 100%;
+  }
+  .s01 .placard .label {
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: #3a4423; margin-bottom: 14px;
+  }
+  .s01 .placard dl { margin: 0; display: grid; gap: 10px 18px; grid-template-columns: max-content 1fr; }
+  .s01 .placard dt {
+    font-family: var(--mono); font-size: 12px;
+    color: #3a4423; letter-spacing: 0.04em;
+    padding-top: 3px;
+  }
+  .s01 .placard dd { margin: 0; font-family: var(--serif); font-size: 17px; color: #14180c; }
+  .s01 .placard .big {
+    font-family: var(--serif); font-style: italic; font-weight: 600;
+    font-size: 28px;
+    color: #3a4423;
+  }
+  .s01 .read-on { color: #3a4423; border-color: #3a4423; --flip: #ece2cc; }
+  .s01 .decor::before {
+    content: ""; position: absolute;
+    top: 18%; left: 50%; transform: translateX(-50%);
+    width: 2px; height: 38vh;
+    background: linear-gradient(to bottom, transparent, rgba(58,68,35,0.18), transparent);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s02 — NEWSPRINT (cream + black, three narrow columns, serif small caps)
+     ═══════════════════════════════════════════════════════════════════ */
+  .s02 { background: #efe9da; color: #0a0a0a; }
+  .s02 .folio { font-family: var(--mono); color: #0a0a0a; opacity: 0.9; }
+  .s02 .folio .ear {
+    background: #0a0a0a; color: #efe9da;
+    padding: 2px 8px; letter-spacing: 0.2em;
+  }
+  .s02 .tag {
+    border: none; padding: 0;
+    font-family: var(--serif); font-variant: small-caps;
+    font-weight: 600; font-size: 14px; letter-spacing: 0.16em;
+    color: #0a0a0a;
+    border-top: 2px solid #0a0a0a;
+    border-bottom: 1px solid #0a0a0a;
+    padding: 6px 0;
+    width: 100%;
+    border-radius: 0;
+  }
+  .s02 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-size: clamp(54px, 8vw, 112px);
+    letter-spacing: -0.03em;
+    line-height: 0.98;
+  }
+  .s02 .hed em {
+    font-style: italic; font-weight: 500;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s02 .lede {
+    font-family: var(--serif);
+    font-size: 19px; line-height: 1.5;
+    max-width: 100%;
+  }
+  .s02 .columns {
+    column-count: 3;
+    column-gap: 32px;
+    column-rule: 1px solid rgba(10,10,10,0.25);
+    font-family: var(--serif);
+    font-size: 15px; line-height: 1.55;
+  }
+  .s02 .columns p { margin: 0 0 12px; }
+  .s02 .columns p:first-child::first-letter {
+    font-weight: 900; font-size: 1.4em; line-height: 1;
+    margin-right: 4px;
+  }
+  .s02 .byline {
+    font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: #0a0a0a; opacity: 0.7;
+    border-top: 1px dotted #0a0a0a;
+    padding-top: 8px;
+  }
+  .s02 .read-on { color: #0a0a0a; border-color: #0a0a0a; --flip: #efe9da; }
+  @media (max-width: 800px) {
+    .s02 .columns { column-count: 1; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s03 — SPREADSHEET (monospace tabular, subdued greys, gridlines)
+     ═══════════════════════════════════════════════════════════════════ */
+  .s03 { background: #f1f1ee; color: #15171a; }
+  .s03 .folio { font-family: var(--mono); color: #555; }
+  .s03 .tag {
+    font-family: var(--mono); font-weight: 600;
+    border-color: #15171a; color: #15171a;
+    border-radius: 0; padding: 4px 10px;
+    background: #ffffff;
+    font-size: 11px;
+  }
+  .s03 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(48px, 6.6vw, 92px);
+    letter-spacing: -0.035em;
+    line-height: 1.0;
+  }
+  .s03 .hed em {
+    font-style: normal; font-weight: 800;
+    color: #2a5a3a; font-family: var(--mono);
+    background: #d9efde; padding: 0 0.18em;
+    font-size: 0.78em;
+  }
+  .s03 .lede { font-size: 19px; color: #2a2d33; max-width: 60ch; }
+  .s03 .sheet {
+    background: #ffffff;
+    border: 1px solid #c9c9c2;
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .s03 .sheet table { width: 100%; border-collapse: collapse; }
+  .s03 .sheet th, .s03 .sheet td {
+    border-right: 1px solid #e1e1da;
+    border-bottom: 1px solid #e1e1da;
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .s03 .sheet thead th {
+    background: #ebe9df;
+    font-weight: 700;
+    color: #15171a;
+    letter-spacing: 0.04em;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  .s03 .sheet td.col {
+    background: #f6f5ef; font-weight: 600;
+    text-align: right;
+    color: #6a6a60;
+    width: 36px;
+  }
+  .s03 .sheet td .pass { color: #2a5a3a; font-weight: 600; }
+  .s03 .sheet td .span { color: #a85a1a; font-weight: 600; }
+  .s03 .sheet td .err  { color: #a8231a; font-weight: 600; }
+  .s03 .read-on {
+    color: #15171a; border-color: #15171a; --flip: #f1f1ee;
+    border-radius: 0;
+  }
+  .s03 .decor::before {
+    content: ""; position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(40,42,46,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(40,42,46,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s04 — BLUEPRINT (pale grid, monospace annotation, crop marks)
+     ═══════════════════════════════════════════════════════════════════ */
+  .s04 { background: #0d2840; color: #d8e8f8; }
+  .s04 .folio { font-family: var(--mono); color: #82b6e0; }
+  .s04 .tag {
+    color: #82b6e0; border-color: #82b6e0;
+    font-family: var(--mono); font-weight: 400;
+    border-radius: 0; letter-spacing: 0.18em;
+  }
+  .s04 .hed {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "WONK" 1;
+    font-size: clamp(50px, 7.2vw, 102px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: #e8f2ff;
+  }
+  .s04 .hed em {
+    font-style: normal;
+    font-family: var(--mono);
+    font-weight: 600;
+    color: #ffbf2e;
+    font-size: 0.7em;
+    letter-spacing: 0;
+    background: rgba(255,191,46,0.1);
+    padding: 0 0.12em;
+  }
+  .s04 .lede { color: #b8cce2; max-width: 56ch; }
+  .s04 .annotated {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 10px 18px;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.55;
+    color: #d8e8f8;
+  }
+  .s04 .annotated .ax {
+    color: #ffbf2e; font-weight: 600;
+    border-right: 1px solid rgba(130,182,224,0.4);
+    padding-right: 12px;
+    text-align: right;
+  }
+  .s04 .annotated .ax + div { padding-left: 4px; }
+  .s04 .annotated b { color: #ffbf2e; font-weight: 600; }
+  .s04 .read-on { color: #ffbf2e; border-color: #ffbf2e; --flip: #0d2840; }
+  .s04 .decor {
+    background-image:
+      linear-gradient(rgba(130,182,224,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(130,182,224,0.08) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+  .s04 .decor::before, .s04 .decor::after {
+    content: ""; position: absolute;
+    width: 18px; height: 18px;
+    border: 1px solid rgba(130,182,224,0.5);
+  }
+  .s04 .decor::before { top: 28px; right: 28px; border-bottom: none; border-left: none; }
+  .s04 .decor::after  { bottom: 28px; left: 28px;   border-top: none;    border-right: none; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s05 — RISOGRAPH DUOTONE (cyan + magenta, deliberate offset)
+     ═══════════════════════════════════════════════════════════════════ */
+  .s05 { background: #f3ecd6; color: #14143a; position: relative; }
+  .s05 .folio { color: #14143a; }
+  .s05 .tag {
+    background: #14143a; color: #f3ecd6; border-color: #14143a;
+    padding: 4px 12px;
+  }
+  .s05 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(58px, 8.4vw, 124px);
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    color: #d8327a;
+    text-shadow:
+      3px 3px 0 #14143a,
+      -2px -2px 0 #00b3c4;
+    text-transform: uppercase;
+  }
+  .s05 .hed em {
+    font-style: normal;
+    color: #14143a;
+    text-shadow: 3px 3px 0 #d8327a, -2px -2px 0 #00b3c4;
+  }
+  .s05 .lede {
+    font-family: var(--serif);
+    color: #14143a; max-width: 56ch;
+  }
+  .s05 .card {
+    width: 100%;
+    max-width: 720px;
+    background: #f3ecd6;
+    border: 3px solid #14143a;
+    padding: 24px 28px;
+    position: relative;
+  }
+  .s05 .card::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border: 3px solid #00b3c4;
+    transform: translate(6px, 6px);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .s05 .card .meta {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: #d8327a; margin-bottom: 8px;
+  }
+  .s05 .card .note {
+    font-family: var(--serif); font-style: italic;
+    font-size: 20px; color: #14143a; line-height: 1.45;
+  }
+  .s05 .card .count {
+    margin-top: 16px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 12px;
+    color: #14143a;
+    border-top: 1px solid #14143a;
+    padding-top: 10px;
+  }
+  .s05 .card .count strong {
+    font-family: var(--sans); font-weight: 800; font-size: 24px;
+    color: #d8327a;
+  }
+  .s05 .read-on {
+    color: #14143a; border-color: #14143a; --flip: #f3ecd6;
+    background: #00b3c4;
+  }
+  .s05 .read-on:hover { background: #14143a; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s06 — DARK REPORT / CLASSIFIED (crimson on near-black, redact bars)
+     ═══════════════════════════════════════════════════════════════════ */
+  .s06 { background: #0e0a0a; color: #d6cfc6; }
+  .s06 .folio { color: #b8423a; font-family: var(--mono); }
+  .s06 .folio .stamp {
+    border: 1px solid #b8423a; color: #b8423a;
+    padding: 2px 8px;
+    letter-spacing: 0.28em;
+  }
+  .s06 .tag {
+    background: #b8423a; color: #0e0a0a; border-color: #b8423a;
+    font-family: var(--mono); font-weight: 600;
+    border-radius: 0;
+  }
+  .s06 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(52px, 7.6vw, 110px);
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    text-transform: uppercase;
+    color: #ebe2d8;
+  }
+  .s06 .hed .redact {
+    background: #b8423a; color: #b8423a;
+    padding: 0 0.12em;
+    transition: color 0.2s;
+  }
+  .s06 .hed .redact:hover { color: #0e0a0a; }
+  .s06 .lede {
+    font-family: var(--serif);
+    color: #b8b0a6; max-width: 56ch;
+  }
+  .s06 .report {
+    width: 100%;
+    border: 1px solid rgba(184,66,58,0.5);
+    background: rgba(184,66,58,0.06);
+    padding: 22px 26px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.55;
+    color: #c8bfb5;
+  }
+  .s06 .report .head {
+    font-family: var(--mono); font-weight: 600;
+    color: #b8423a;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    border-bottom: 1px solid rgba(184,66,58,0.4);
+    padding-bottom: 8px; margin-bottom: 14px;
+    display: flex; justify-content: space-between;
+  }
+  .s06 .report dl {
+    margin: 0;
+    display: grid; grid-template-columns: max-content 1fr;
+    gap: 8px 18px;
+  }
+  .s06 .report dt {
+    color: #b8423a; font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+  .s06 .report dd { margin: 0; color: #ebe2d8; }
+  .s06 .report dd b { color: #ebe2d8; font-weight: 600; }
+  .s06 .read-on {
+    color: #b8423a; border-color: #b8423a; --flip: #0e0a0a;
+    background: transparent;
+  }
+  .s06 .decor::before {
+    content: "CONFIDENTIAL";
+    position: absolute;
+    top: 50%; right: -8vw;
+    transform: rotate(-90deg) translateX(50%);
+    transform-origin: right center;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 14vw;
+    color: rgba(184,66,58,0.06);
+    letter-spacing: 0.4em;
+    white-space: nowrap;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     COLOPHON
+     ═══════════════════════════════════════════════════════════════════ */
+  .colophon { background: #f5efe2; color: #14140e; }
+  .colophon .folio { color: #4a2316; }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(60px, 9vw, 132px);
+    color: #14140e;
+  }
+  .colophon .hed em { color: #4a2316; font-style: italic; font-weight: 500; }
+  .colophon .lede { color: #2a2a22; max-width: 60ch; }
+  .colophon .sources {
+    font-family: var(--mono); font-size: 13px;
+    color: #4a2316;
+    border-top: 1px solid rgba(74,35,22,0.35);
+    padding-top: 14px;
+    width: 100%;
+    max-width: 720px;
+    column-count: 2; column-gap: 32px;
+  }
+  .colophon .sources p { margin: 0 0 6px; break-inside: avoid; }
+  @media (max-width: 800px) {
+    .colophon .sources { column-count: 1; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COVER — pull-quote treatment
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span class="mark">Ephemeris.</span>
+    <span>Issue 024 · Tue 12 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="pq">
+      <span class="quotemark">&ldquo;</span>
+      We are reimagining every role <span class="lift">for how a company operates in the agentic AI era.</span>
+    </p>
+    <p class="attrib">Cloudflare · "Building for the future" · 07 May 2026 — and inside, five other postcards from that future.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>Neutral, by spec.</span><span>Anthropic</span></a>
+      <a href="#s02"><span><span class="num">02</span>Six hundred preview deploys, daily.</span><span>Vercel</span></a>
+      <a href="#s03"><span><span class="num">03</span>Vibe code, observed.</span><span>Sentry</span></a>
+      <a href="#s04"><span><span class="num">04</span>RSI, regulation, and a brain in a jar.</span><span>Jack Clark</span></a>
+      <a href="#s05"><span><span class="num">05</span>Read the model with the model.</span><span>via @seeallochnaya</span></a>
+      <a href="#s06"><span><span class="num">06</span>We are reimagining every role.</span><span>Cloudflare</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     s01 — Anthropic Election Safeguards — museum placard
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s01 centered" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 024</span>
+    <span>01 / 6 · Anthropic</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI safety · Evaluations</span>
+    <h2 class="hed">Neutral, <em>by spec.</em></h2>
+    <p class="lede">Anthropic published its election-safeguards update: a written political-neutrality spec, an internal eval set of 600 partisan prompts, and the numbers. Opus 4.7 hits 95% on the balance metric and 100% on the refusal-of-influence set — measurable impartiality, not vibes.</p>
+    <div class="figure">
+      <div class="placard">
+        <div class="label">Spec · Evaluation · 24 Apr 2026</div>
+        <dl>
+          <dt>Balance</dt><dd><span class="big">95%</span> &nbsp; Opus 4.7 across 600 partisan prompts.</dd>
+          <dt>Refusal</dt><dd><span class="big">100%</span> &nbsp; on explicit "influence the voter" requests.</dd>
+          <dt>Method</dt><dd>Adversarial pairs, both sides of each issue, blind LLM judges.</dd>
+          <dt>Spec</dt><dd>Public, versioned, applied uniformly across topics.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/news/election-safeguards-update" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     s02 — Vercel · Superset's agent IDE — newsprint
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span class="ear">Section B</span>
+    <span>Ephemeris · Issue 024</span>
+    <span>02 / 6 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agentic coding</span>
+    <h2 class="hed">Six hundred preview deploys, <em>every day.</em></h2>
+    <p class="lede">Superset built an IDE where every developer can run a stable of agents in parallel — each in its own ephemeral sandbox, each producing a preview URL. The math: ~50 engineers × ~12 agents × ~1 deploy each = 600 deploys a day, against a CI that used to ship 30. The post is half blueprint, half ops handbook.</p>
+    <div class="figure">
+      <div class="columns">
+        <p>The pattern is not "AI writes code"; it's "developer orchestrates ten attempts at the same task in parallel, then picks the one whose preview behaves right." That only works if every attempt has a real URL, a real database snapshot, and a real cost ceiling.</p>
+        <p>Superset's stack: Vercel Sandboxes for execution, branch-per-agent for state, a routing layer that gives each agent its own subdomain. Idle agents go to zero. Bad ones get killed by the orchestrator, not by the developer noticing.</p>
+        <p>Headline lesson: agent IDEs are not editors with chat sidebars. They're CI systems where every PR is a small fleet, and the human's job is to grade outcomes, not to write the diff.</p>
+      </div>
+      <p class="byline">Vercel Engineering · 10 May 2026</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/how-superset-built-the-ide-for-ai-agents-on-vercel" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     s03 — Sentry · Next.js + Supabase observability — spreadsheet
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 024</span>
+    <span>03 / 6 · Sentry</span>
+  </header>
+  <div class="main">
+    <span class="tag">Observability · Next.js</span>
+    <h2 class="hed">Vibe code, <em>observed.</em></h2>
+    <p class="lede">A walkthrough wiring a real distributed trace across Next.js routes, Supabase Edge Functions, and Postgres queries. Drops the SDK in three files, propagates context across the wire, then shows the resulting flamegraph for a slow signup. Cheap to adopt this afternoon; valuable the first time you have to debug something that touches a database from inside an Edge runtime.</p>
+    <div class="figure">
+      <div class="sheet">
+        <table>
+          <thead>
+            <tr><th></th><th>Layer</th><th>Span name</th><th>Cost</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="col">1</td><td>Next.js · App Router</td><td>POST /api/signup</td><td>312&nbsp;ms</td><td><span class="pass">ok</span></td></tr>
+            <tr><td class="col">2</td><td>Edge function</td><td>auth.verify_email</td><td>118&nbsp;ms</td><td><span class="pass">ok</span></td></tr>
+            <tr><td class="col">3</td><td>Supabase · Postgres</td><td>INSERT public.users</td><td>9&nbsp;ms</td><td><span class="pass">ok</span></td></tr>
+            <tr><td class="col">4</td><td>Edge function</td><td>welcome_email.send</td><td><b>2.1&nbsp;s</b></td><td><span class="span">slow</span></td></tr>
+            <tr><td class="col">5</td><td>Next.js · App Router</td><td>response.render</td><td>14&nbsp;ms</td><td><span class="pass">ok</span></td></tr>
+            <tr><td class="col">6</td><td>Trace · trace_id</td><td>connects 1 → 5, same root</td><td>—</td><td><span class="pass">linked</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.sentry.io/nextjs-supabase-observability/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     s04 — Jack Clark Import AI 456 — blueprint
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 024</span>
+    <span>04 / 6 · Import AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Policy · Research · Forecasting</span>
+    <h2 class="hed">RSI, regulation, and a <em>brain in a jar.</em></h2>
+    <p class="lede">Jack Clark's three-vector issue: a model of recursive self-improvement against macro-economic growth, a "radical optionality" framework for AI regulation that doesn't pre-commit to a path, and a wetware paper where neurons grown on chips perform pattern recognition. Three things a founder should be tracking even if none of them ship next quarter.</p>
+    <div class="figure">
+      <div class="annotated">
+        <div class="ax">§1</div>
+        <div><b>RSI vs. economic growth.</b> A back-of-the-envelope model: if RSI compounds at &gt;2× annually, even a single year of "off" growth blows past every prior tech wave. Inputs are guessable; the curve is not.</div>
+        <div class="ax">§2</div>
+        <div><b>Radical optionality.</b> Regulators don't have to pick "ban", "license", or "permit". Build a portfolio of triggered policies — only fire the strict ones when measurable thresholds (compute, capability evals, autonomy tests) tip. Sounds obvious; nobody is doing it.</div>
+        <div class="ax">§3</div>
+        <div><b>A neural computer.</b> A paper grows rat neurons on a chip, trains them on a pattern task, and reports above-chance accuracy. Substrate isn't silicon. The frame "AI = matmul" is one possible local maximum.</div>
+        <div class="ax">§4</div>
+        <div><b>What to do this week.</b> Re-check your forecasts for a 2-year horizon under "RSI works modestly." Most plans break before then.</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://jack-clark.net/2026/05/11/import-ai-456-rsi-and-economic-growth-radical-optionality-for-ai-regulation-and-a-neural-computer/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     s05 — DeepSeek-V4 annotated — risograph duotone
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 024</span>
+    <span>05 / 6 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Models · Explainer</span>
+    <h2 class="hed">Read the model <em>with the model.</em></h2>
+    <p class="lede">An interactive, side-by-side walkthrough of the DeepSeek-V4 paper: every figure rebuilt, every routing decision annotated, with the author's notes in the margins. 50 of 90 sections live so far. The author used GPT-5.5/Pro and Gemini 3.1 Pro to research the math, then kept editorial control over every note — a model for how to actually read a frontier paper in 2026.</p>
+    <div class="figure">
+      <div class="card">
+        <p class="meta">Annotation · §4.2 MoE Routing</p>
+        <p class="note">"The shared-experts trick isn't new, but the auxiliary-loss-free balancing is. Once you see the loss term they removed, the routing collapse from V3 makes sense in hindsight — and so does why nobody else tried this."</p>
+        <p class="count"><span>Sections annotated</span> <span><strong>50</strong> / 90</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://dsv4.interactive.ikot.blog" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     s06 — Cloudflare layoffs — dark report / classified
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span class="stamp">Restructure · Q2 2026</span>
+    <span>06 / 6 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Industry · Agentic era</span>
+    <h2 class="hed">We are <span class="redact">reimagining</span> every role.</h2>
+    <p class="lede">Cloudflare cuts more than 1,100 staff in one stroke and explicitly names the cause: internal AI usage up roughly 600% in three months, "every internal process, team, and role" up for redesign. Generous severance, frank language, no euphemisms. The first frontier-infra company to publicly restructure around agents as a primary lever.</p>
+    <div class="figure">
+      <div class="report">
+        <div class="head"><span>Memo · 07 May 2026</span><span>Source: Cloudflare blog</span></div>
+        <dl>
+          <dt>Cut</dt><dd><b>≈ 1,100+ roles</b> across the company.</dd>
+          <dt>Stated cause</dt><dd>Internal AI usage up ~6× in three months.</dd>
+          <dt>Language</dt><dd>"Reimagining every internal process, team, and role" for the agentic era.</dd>
+          <dt>Severance</dt><dd>Above market — vesting acceleration, extended health, outplacement.</dd>
+          <dt>Read as</dt><dd>A signal, not an isolated event — others will copy the framing.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/building-for-the-future/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COLOPHON
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 024</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Six pieces today — half a normal issue, because the day was thin and a tight set beat a padded one. The rubric (AI tools, creative software, dev tools, security, research, anything actionable) preferred postcards from the agentic-era restructure over more launch posts.</p>
+    <div class="sources">
+      <p>Anthropic · News</p>
+      <p>Vercel · Engineering</p>
+      <p>Sentry · Engineering</p>
+      <p>jack-clark.net · Import AI</p>
+      <p>ikot.blog · via @seeallochnaya</p>
+      <p>Cloudflare · Blog</p>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
