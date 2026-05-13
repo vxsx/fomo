@@ -37,9 +37,11 @@ https://blog.cloudflare.com/making-rust-workers-reliable
 https://blog.cloudflare.com/past-bots-and-humans
 https://blog.cloudflare.com/post-quantum-ipsec
 https://blog.cloudflare.com/q1-2026-internet-disruption-summary
+https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/shared-dictionaries
 https://blog.cloudflare.com/unweight-tensor-compression
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
+https://claude.com/blog/agent-view-in-claude-code
 https://claude.com/blog/connectors-for-everyday-life
 https://deeplearning.ai/the-batch/issue-347
 https://deeplearning.ai/the-batch/issue-349
@@ -69,6 +71,7 @@ https://github.blog/engineering/infrastructure/how-github-uses-ebpf-to-improve-d
 https://github.blog/engineering/infrastructure/when-protections-outlive-their-purpose-a-lesson-on-managing-defense-systems-at-scale
 https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github
 https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/autoresearch
+https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
 https://github.com/BayramAnnakov/factory-agent
 https://github.com/BayramAnnakov/token-audit-skill
 https://github.com/deepseek-ai/Thinking-with-Visual-Primitives
@@ -126,6 +129,7 @@ https://posthog.com/blog/untangling-rayon-and-tokio
 https://posthog.com/blog/why-attacking-competitors-is-dumb
 https://posthog.com/blog/your-lifecycle-emails-are-wrong
 https://programbench.com/
+https://programbench.com/blog/gpt-5-5-first-solve
 https://proofofconcept.pub/p/design-systems-are-now-inference
 https://sentry.engineering/blog/building-type-safe-metrics-api-in-swift-part-ii
 https://sentry.engineering/blog/do-you-really-need-an-mcp-to-build-your-app
@@ -139,6 +143,8 @@ https://sentry.io/blog/nextjs-supabase-observability
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
 https://shir-man.com/free-llm
 https://sierra.ai/blog/the-ai-native-interview
+https://t.me/ProductsAndStartups/1740
+https://t.me/ProductsAndStartups/1745
 https://t.me/rvnikita_blog/1735
 https://t.me/s/denissexy
 https://therundown.ai/p/openai-superapp-hiding-inside-codex

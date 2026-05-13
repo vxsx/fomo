@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 025 · 13 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh; min-height: 100dvh;
+    position: relative; overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio, .spread > .main, .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block; font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 12px; border: 1px solid currentColor; border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif); font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02; letter-spacing: -0.02em;
+    padding-bottom: 0.12em; word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45; max-width: 50ch; margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block; font-family: var(--sans);
+    font-weight: 600; font-size: 15px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px; border: 2px solid currentColor;
+    text-decoration: none; color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═════════════ COVER · Date-hero ═════════════ */
+  .cover { background: #0c1a14; color: #e8e2cf; }
+  .cover .date-hero {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(72px, 17vw, 280px);
+    line-height: 0.86;
+    letter-spacing: -0.04em;
+    color: #e8e2cf;
+    padding-bottom: 0.1em;
+    margin: 0;
+  }
+  .cover .date-hero em {
+    font-style: italic;
+    color: #ff6a3d;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .cover .masthead-line {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: #ff6a3d;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(232,226,207,0.35);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 6px 0;
+    border-bottom: 1px dotted rgba(232,226,207,0.22);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.7; }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #ff6a3d; margin-right: 8px;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  /* ═════════════ s01 · Blueprint (Cloudflare QUIC) ═════════════ */
+  .s01 { background: #0d2c4a; color: #d3e3f2; position: relative; }
+  .s01 .tag   { color: #ffd166; border-color: #ffd166; }
+  .s01 .hed   { font-weight: 700; }
+  .s01 .hed em {
+    font-style: italic; color: #ffd166;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s01 .read-on { color: #ffd166; border-color: #ffd166; --flip: #0d2c4a; }
+  .s01 .blueprint {
+    border: 1px solid rgba(211,227,242,0.35);
+    padding: clamp(18px, 2vw, 28px);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    background: rgba(255,255,255,0.04);
+    max-width: 720px;
+  }
+  .s01 .blueprint .lbl { color: #ffd166; letter-spacing: 0.16em; text-transform: uppercase; font-size: 11px; }
+  .s01 .blueprint .v   { color: #d3e3f2; }
+  .s01 .blueprint .arrow { color: #ff9a8b; }
+  .s01 .decor::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(211,227,242,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(211,227,242,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .s01 .decor::after {
+    content: ""; position: absolute;
+    right: -6vw; top: -6vw; width: 38vw; height: 38vw;
+    border: 1px dashed rgba(255,209,102,0.3);
+    border-radius: 50%;
+  }
+
+  /* ═════════════ s02 · Neo-brutalist (Stanford 9× vulns) ═════════════ */
+  .s02 { background: #f3eee5; color: #0a0a0a; position: relative; }
+  .s02 .tag {
+    color: #f3eee5; background: #0a0a0a; border-color: #0a0a0a;
+    border-radius: 0; padding: 8px 14px;
+  }
+  .s02 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    font-size: clamp(54px, 9vw, 132px);
+  }
+  .s02 .hed em {
+    font-style: normal;
+    background: #d62828; color: #f3eee5;
+    padding: 0 0.12em;
+    border-radius: 0;
+    display: inline-block;
+  }
+  .s02 .lede { font-family: var(--sans); font-weight: 500; max-width: 56ch; }
+  .s02 .read-on {
+    color: #f3eee5; background: #0a0a0a;
+    border-color: #0a0a0a; border-radius: 0;
+    --flip: #f3eee5;
+  }
+  .s02 .read-on:hover { background: #d62828; border-color: #d62828; }
+  .s02 .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 0;
+    border-top: 4px solid #0a0a0a;
+    border-bottom: 4px solid #0a0a0a;
+    width: 100%; max-width: 760px;
+  }
+  .s02 .stats .cell {
+    padding: 16px 18px;
+    border-right: 4px solid #0a0a0a;
+  }
+  .s02 .stats .cell:last-child { border-right: none; }
+  .s02 .stats .num {
+    font-family: var(--sans); font-weight: 900;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1; letter-spacing: -0.03em;
+    color: #d62828;
+  }
+  .s02 .stats .num .unit {
+    font-family: var(--sans); font-style: normal; font-weight: 700;
+    font-size: 0.32em; letter-spacing: normal;
+    margin-left: 0.12em; color: #0a0a0a;
+  }
+  .s02 .stats .lbl {
+    font-family: var(--sans); font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin-top: 6px;
+  }
+  @media (max-width: 800px) {
+    .s02 .stats { grid-template-columns: 1fr; }
+    .s02 .stats .cell { border-right: none; border-bottom: 4px solid #0a0a0a; }
+    .s02 .stats .cell:last-child { border-bottom: none; }
+  }
+
+  /* ═════════════ s03 · Neon / cyberpunk (ProgramBench) ═════════════ */
+  .s03 {
+    background: #0a0518;
+    color: #ecd9ff;
+    position: relative;
+  }
+  .s03 .tag { color: #54f3d1; border-color: #54f3d1; }
+  .s03 .hed {
+    background: linear-gradient(90deg, #54f3d1 0%, #b04bff 60%, #ff5dcf 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 0 transparent;
+    font-weight: 900;
+  }
+  .s03 .hed em {
+    font-style: italic;
+    background: linear-gradient(90deg, #ffd166, #ff5dcf);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+  .s03 .lede { color: #d6c8ee; }
+  .s03 .read-on { color: #54f3d1; border-color: #54f3d1; --flip: #0a0518; }
+  .s03 .scoreboard {
+    font-family: var(--mono);
+    border: 1px solid rgba(84,243,209,0.4);
+    background: linear-gradient(135deg, rgba(176,75,255,0.12), rgba(84,243,209,0.06));
+    padding: clamp(18px, 2vw, 26px);
+    max-width: 640px;
+    font-size: 14px;
+    line-height: 1.9;
+  }
+  .s03 .scoreboard .row {
+    display: flex; justify-content: space-between;
+    border-bottom: 1px dashed rgba(236,217,255,0.18);
+    padding: 4px 0;
+  }
+  .s03 .scoreboard .row:last-child { border-bottom: none; }
+  .s03 .scoreboard .model { color: #ecd9ff; }
+  .s03 .scoreboard .score { color: #54f3d1; }
+  .s03 .scoreboard .gold  { color: #ffd166; }
+  .s03 .scoreboard .hdr {
+    color: #54f3d1; letter-spacing: 0.18em; text-transform: uppercase;
+    font-size: 11px; margin-bottom: 6px;
+  }
+  .s03 .decor::before {
+    content: ""; position: absolute;
+    left: -10vw; bottom: -10vw;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(176,75,255,0.35), transparent 65%);
+    filter: blur(4px);
+  }
+  .s03 .decor::after {
+    content: ""; position: absolute;
+    right: -8vw; top: -8vw;
+    width: 40vw; height: 40vw;
+    background: radial-gradient(circle, rgba(84,243,209,0.25), transparent 65%);
+  }
+
+  /* ═════════════ s04 · Risograph duotone (slot vs printer) ═════════════ */
+  .s04 { background: #f6efde; color: #11135a; position: relative; }
+  .s04 .tag { color: #e3147a; border-color: #e3147a; }
+  .s04 .hed {
+    color: #11135a;
+    text-shadow: 3px 3px 0 #e3147a;
+  }
+  .s04 .hed em {
+    font-style: italic;
+    color: #e3147a;
+    text-shadow: 3px 3px 0 #11135a;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s04 .read-on { color: #11135a; border-color: #11135a; --flip: #f6efde; }
+  .s04 .duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 760px;
+    width: 100%;
+  }
+  .s04 .duo .card {
+    padding: 18px;
+    border: 2px solid currentColor;
+  }
+  .s04 .duo .a { background: rgba(227,20,122,0.12); border-color: #e3147a; color: #e3147a; }
+  .s04 .duo .b { background: rgba(17,19,90,0.08); border-color: #11135a; color: #11135a; }
+  .s04 .duo h4 {
+    font-family: var(--sans);
+    font-weight: 800; font-size: 13px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .s04 .duo p {
+    font-family: var(--serif); font-size: 17px; line-height: 1.4;
+    margin: 0; color: #1a1a1a;
+  }
+  @media (max-width: 800px) { .s04 .duo { grid-template-columns: 1fr; } }
+
+  /* ═════════════ s05 · Pastel rose (Slide-Inspector skill) ═════════════ */
+  .s05 {
+    background: linear-gradient(160deg, #fde6ec 0%, #f6dbe6 45%, #efd0d8 100%);
+    color: #4a1a2a;
+    position: relative;
+  }
+  .s05 .tag { color: #8a2a47; border-color: #8a2a47; }
+  .s05 .hed {
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #4a1a2a;
+  }
+  .s05 .hed em {
+    font-style: italic;
+    font-weight: 800;
+    color: #8a2a47;
+  }
+  .s05 .lede { font-style: italic; color: #5a2238; }
+  .s05 .read-on { color: #8a2a47; border-color: #8a2a47; --flip: #fde6ec; }
+  .s05 .recipe {
+    font-family: var(--mono);
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(138,42,71,0.25);
+    padding: clamp(18px, 2vw, 26px);
+    max-width: 680px;
+    font-size: 14px;
+    line-height: 1.85;
+    color: #4a1a2a;
+  }
+  .s05 .recipe .step { display: block; }
+  .s05 .recipe .num {
+    font-family: var(--serif); font-style: italic; font-weight: 700;
+    color: #8a2a47; margin-right: 10px;
+  }
+  .s05 .decor::before {
+    content: ""; position: absolute;
+    right: -8vw; bottom: -10vw;
+    width: 38vw; height: 38vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.7), transparent 70%);
+  }
+
+  /* ═════════════ s06 · Newsprint (Agent View Claude Code) ═════════════ */
+  .s06 { background: #f1ede4; color: #141414; position: relative; }
+  .s06 .folio { font-family: var(--serif); font-style: italic; opacity: 0.7; letter-spacing: 0.1em; text-transform: none; font-size: 14px; }
+  .s06 .tag {
+    border: none; padding: 0;
+    font-family: var(--serif); font-weight: 700;
+    font-style: italic;
+    font-variant: small-caps;
+    letter-spacing: 0.16em;
+    color: #6e1a14;
+    font-size: 16px;
+    text-transform: lowercase;
+  }
+  .s06 .hed {
+    font-weight: 700;
+    font-variation-settings: "opsz" 144;
+    border-top: 4px double #141414;
+    border-bottom: 1px solid #141414;
+    padding: 14px 0 20px;
+  }
+  .s06 .hed em {
+    font-style: italic;
+    font-weight: 700;
+    color: #6e1a14;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+  }
+  .s06 .lede { max-width: none; }
+  .s06 .columns {
+    column-count: 3;
+    column-gap: 28px;
+    column-rule: 1px solid rgba(20,20,20,0.2);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.55;
+    text-align: justify;
+    hyphens: none;
+  }
+  .s06 .columns p { margin: 0 0 14px; }
+  .s06 .columns p:first-child::first-line {
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .s06 .read-on {
+    color: #6e1a14; border-color: #6e1a14;
+    --flip: #f1ede4;
+  }
+  @media (max-width: 800px) { .s06 .columns { column-count: 1; } }
+
+  /* ═════════════ Colophon · Museum placard ═════════════ */
+  .colophon { background: #f5f1e6; color: #2a2e1a; }
+  .colophon .folio {
+    font-family: var(--serif); font-style: italic;
+    letter-spacing: 0.08em; text-transform: none; opacity: 0.7;
+  }
+  .colophon .tag {
+    border: none; padding: 0;
+    font-family: var(--serif); font-variant: small-caps;
+    letter-spacing: 0.22em; color: #3a4a1a;
+    font-size: 14px; text-transform: lowercase;
+  }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-size: clamp(42px, 5vw, 72px);
+  }
+  .colophon .hed em {
+    font-style: italic; color: #3a4a1a;
+  }
+  .colophon .placard {
+    border: 1px solid rgba(58,74,26,0.4);
+    padding: clamp(20px, 2.5vw, 32px);
+    max-width: 540px;
+    background: rgba(255,255,255,0.4);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .colophon .placard dl {
+    display: grid; grid-template-columns: max-content 1fr;
+    gap: 6px 18px; margin: 0;
+  }
+  .colophon .placard dt {
+    font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    font-size: 11px; color: #3a4a1a; padding-top: 4px;
+  }
+  .colophon .placard dd { margin: 0; }
+  .colophon .placard hr {
+    border: none; border-top: 1px solid rgba(58,74,26,0.3);
+    margin: 16px 0;
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- COVER -->
+<section class="spread cover centered" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 025</span>
+    <span>Wednesday · 13 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <span class="masthead-line">Ephemeris · 025</span>
+    <h1 class="date-hero">WED<br>13 · <em>MAY</em></h1>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>When idle isn't idle</span><span>Cloudflare</span></a>
+      <a href="#s02"><span><span class="num">02</span>Vibing ships nine times the vulns</span><span>Stanford · @ProductsAndStartups</span></a>
+      <a href="#s03"><span><span class="num">03</span>GPT-5.5 closes the first ProgramBench task</span><span>@seeallochnaya</span></a>
+      <a href="#s04"><span><span class="num">04</span>Slot machine, or printer</span><span>@ProductsAndStartups</span></a>
+      <a href="#s05"><span><span class="num">05</span>A skill that fixes Claude's slides</span><span>@ProductsAndStartups</span></a>
+      <a href="#s06"><span><span class="num">06</span>Every Claude Code session in one window</span><span>@rvnikita_blog</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- s01 · Cloudflare QUIC -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · 025</span>
+    <span>01 / 06 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Networking · Postmortem</span>
+    <h2 class="hed">When <em>idle</em> isn't idle.</h2>
+    <p class="lede">Cloudflare watched QUIC throughput plummet on certain machines and traced it home. A Linux kernel optimisation kept telling the stack the connection had gone idle while real traffic flowed; CUBIC dutifully collapsed the congestion window to its minimum and refused to grow it back. The bug had nothing to do with QUIC.</p>
+    <div class="figure">
+      <div class="blueprint">
+        <div><span class="lbl">symptom</span> &nbsp;&nbsp; cwnd pinned at floor</div>
+        <div><span class="lbl">stack</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; quiche · linux 6.x · cubic</div>
+        <div><span class="lbl">false cue</span> &nbsp;&nbsp; tcp_app_limited <span class="arrow">→</span> "idle"</div>
+        <div><span class="lbl">real state</span> &nbsp; congested egress</div>
+        <div><span class="lbl">fix</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; don't trust the kernel about your own flow</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/quic-death-spiral-fix/" target="_blank" rel="noopener"><span>Read the postmortem →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- s02 · Stanford 9x vulns -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · 025</span>
+    <span>02 / 06 · Stanford · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Vibe coding</span>
+    <h2 class="hed">Pure vibing ships <em>nine times</em> the vulns.</h2>
+    <p class="lede">Six thousand real coding sessions, audited end to end. When developers let the agent drive without review, vulnerabilities multiply 9× compared to human–AI collaboration. Even with review, only 44% of AI-suggested code survives to a commit. The headline isn't "AI is dangerous" — it's that the loop wants a human in it.</p>
+    <div class="figure">
+      <div class="stats">
+        <div class="cell">
+          <div class="num">9<span class="unit">×</span></div>
+          <div class="lbl">more vulns, pure vibing</div>
+        </div>
+        <div class="cell">
+          <div class="num">44<span class="unit">%</span></div>
+          <div class="lbl">AI code that ships</div>
+        </div>
+        <div class="cell">
+          <div class="num">6<span class="unit">k</span></div>
+          <div class="lbl">real sessions audited</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://t.me/ProductsAndStartups/1740" target="_blank" rel="noopener"><span>Read the brief →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- s03 · ProgramBench neon -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · 025</span>
+    <span>03 / 06 · ProgramBench · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Benchmark · Models</span>
+    <h2 class="hed">A coding benchmark just <em>solved itself.</em></h2>
+    <p class="lede">ProgramBench measures agents on full software-engineering tasks, not toy snippets. This week, GPT-5.5 at xhigh reasoning closed its first complete task — and pushed 13.5% of programs past the 95%-tests-pass threshold. Claude Opus 4.7 trails materially. Treat it as a snapshot, not a winner — both labs ship fast.</p>
+    <div class="figure">
+      <div class="scoreboard">
+        <div class="hdr">ProgramBench · xhigh reasoning</div>
+        <div class="row"><span class="model">GPT-5.5</span><span class="score gold">13.5%  ★ 1 full solve</span></div>
+        <div class="row"><span class="model">Claude Opus 4.7</span><span class="score">trails</span></div>
+        <div class="row"><span class="model">prior leader</span><span class="score">~0% full</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://programbench.com/blog/gpt-5-5-first-solve/" target="_blank" rel="noopener"><span>Read the benchmark →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- s04 · Slot vs printer -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · 025</span>
+    <span>04 / 06 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Product · Strategy</span>
+    <h2 class="hed">Slot machine. Or <em>printer.</em></h2>
+    <p class="lede">Two product shapes are emerging for generative AI. The casino: high-variance, cheap pulls, the user runs the model ten times to get one keeper. The printer: one disciplined pull, expected to land on the first try. Each demands a different unit economics, a different UI, a different promise. Pick on purpose, not by accident.</p>
+    <div class="figure">
+      <div class="duo">
+        <div class="card a">
+          <h4>The slot machine</h4>
+          <p>Cheap inference, many tries, surprise as feature. Image gen, "draft me ten taglines," generative play. Margin lives in volume; trust lives in the dice.</p>
+        </div>
+        <div class="card b">
+          <h4>The printer</h4>
+          <p>Expensive inference, one shot, no retry expected. Tax filings, code review, contract drafting. Margin lives in correctness; trust lives in the receipt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://t.me/ProductsAndStartups/1745" target="_blank" rel="noopener"><span>Read the framing →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- s05 · Slide-Inspector pastel -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · 025</span>
+    <span>05 / 06 · GitHub · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Skills · Creative tools</span>
+    <h2 class="hed">Claude makes the slides. This skill <em>fixes them.</em></h2>
+    <p class="lede">Bayram Annakov packaged the post-production pass for AI-generated decks into a Claude skill called Slide-Inspector. It hunts the usual failure modes — text overflowing the box, images stretched to nonsense, contrast too low for projection — and rewrites the offending slide in place. Drop it in, run it after generation, ship the deck.</p>
+    <div class="figure">
+      <div class="recipe">
+        <span class="step"><span class="num">i.</span> generate the deck as usual</span>
+        <span class="step"><span class="num">ii.</span> point Slide-Inspector at the .pptx</span>
+        <span class="step"><span class="num">iii.</span> it audits every slide: overflow, sizing, contrast</span>
+        <span class="step"><span class="num">iv.</span> it patches the breakages — text reflowed, images recropped</span>
+        <span class="step"><span class="num">v.</span> review, present</span>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector" target="_blank" rel="noopener"><span>Read the skill →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- s06 · Agent View newsprint -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · 025 · The Daily Spread</span>
+    <span>06 / 06 · Anthropic · via @rvnikita_blog</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Claude Code</span>
+    <h2 class="hed">Every Claude Code session, <em>one window.</em></h2>
+    <p class="lede">Anthropic introduced Agent View, a unified UI for managing parallel Claude Code sessions without dragging tmux into the conversation. It is a small change with an outsized effect: the developer can finally watch six agents at once and steer the one drifting off the rails.</p>
+    <div class="figure">
+      <div class="columns">
+        <p>For the past year, anyone running several agents at once has stitched together their own console — split panes, browser tabs, a notebook of session IDs. Agent View ends that. Each running session gets a card, each card surfaces the agent's last action and its current ask, and switching between them is one click.</p>
+        <p>The interesting part is not the UI; it is the implied workflow. Anthropic is conceding, in product form, that one developer routinely runs many agents and needs to triage them like patients in an ER. The skill it rewards is not coding, but choosing which agent to interrupt next.</p>
+        <p>For solo founders and small teams this lands close to a force multiplier. For larger orgs it raises a different question: how do you review six agents' worth of commits, and who owns the rejected diffs? Worth a Monday morning of experiments.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://claude.com/blog/agent-view-in-claude-code" target="_blank" rel="noopener"><span>Read the announcement →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- Colophon -->
+<section class="spread colophon centered" id="colophon">
+  <header class="folio">
+    <span>End of issue 025</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <span class="tag">colophon</span>
+    <h3 class="hed">That's <em>Wednesday.</em></h3>
+    <div class="figure">
+      <div class="placard">
+        <dl>
+          <dt>issue</dt><dd>025 · 13 May 2026 · Europe/Zürich</dd>
+          <dt>today</dt><dd>Cloudflare · Stanford · ProgramBench · @ProductsAndStartups · GitHub · Anthropic</dd>
+          <dt>rubric</dt><dd>AI tools, dev tools, security, benchmarks, creative software — actionable for engineers and founders this week.</dd>
+        </dl>
+        <hr>
+        <dl>
+          <dt>tomorrow</dt><dd>08:00 Zürich.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
