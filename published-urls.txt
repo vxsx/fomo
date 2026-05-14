@@ -26,6 +26,7 @@ https://blog.cloudflare.com/agents-stripe-projects
 https://blog.cloudflare.com/agents-week-in-review
 https://blog.cloudflare.com/ai-code-review
 https://blog.cloudflare.com/artifacts-git-for-agents-beta
+https://blog.cloudflare.com/browser-run-containers
 https://blog.cloudflare.com/building-for-the-future
 https://blog.cloudflare.com/code-orange-fail-small-complete
 https://blog.cloudflare.com/copy-fail-linux-vulnerability-mitigation
@@ -43,6 +44,7 @@ https://blog.cloudflare.com/unweight-tensor-compression
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
 https://claude.com/blog/agent-view-in-claude-code
 https://claude.com/blog/connectors-for-everyday-life
+https://deeplearning.ai/short-courses/build-interactive-agents-with-generative-ui
 https://deeplearning.ai/the-batch/issue-347
 https://deeplearning.ai/the-batch/issue-349
 https://deeplearning.ai/the-batch/issue-350
@@ -50,6 +52,7 @@ https://deeplearning.ai/the-batch/issue-351
 https://deeplearning.ai/the-batch/issue-352
 https://developers.openai.com/ads
 https://dsv4.interactive.ikot.blog
+https://dsv4.interactive.ikot.blog/
 https://every.to/on-every/re-re-introducing-sparkle-marie-kondo-your-mac
 https://every.to/source-code/how-we-run-a-25-person-company-on-four-ai-agents
 https://every.to/source-code/the-folder-is-the-agent
@@ -99,6 +102,7 @@ https://nextjs.org/blog/next-16-2-ai
 https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/turbopack-incremental-computation
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
+https://openai.com/index/building-codex-windows-sandbox
 https://openai.com/index/codex-for-almost-everything
 https://openai.com/index/cybersecurity-in-the-intelligence-age
 https://openai.com/index/delivering-low-latency-voice-ai-at-scale
@@ -113,6 +117,7 @@ https://openai.com/index/introducing-openai-privacy-filter
 https://openai.com/index/introducing-workspace-agents-in-chatgpt
 https://openai.com/index/mrc-supercomputer-networking
 https://openai.com/index/open-source-codex-orchestration-symphony
+https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack
 https://openai.com/index/running-codex-safely
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
 https://openai.com/index/testing-ads-in-chatgpt
@@ -153,6 +158,7 @@ https://thezvi.substack.com/p/ai-166-google-sells-out
 https://thezvi.substack.com/p/ai-167-the-prior-restraint-era-begins
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding-f54
+https://thezvi.substack.com/p/cyber-lack-of-security-and-ai-governance
 https://thezvi.substack.com/p/gpt-55-capabilities-and-reactions
 https://thezvi.substack.com/p/opus-47-part-2-capabilities-and-reactions
 https://thezvi.substack.com/p/opus-47-part-3-model-welfare
@@ -162,6 +168,7 @@ https://thezvi.substack.com/p/what-is-anthropic
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
 https://vercel.com/blog/agent-responsibly
 https://vercel.com/blog/agentic-infrastructure
+https://vercel.com/blog/ai-gateway-production-index
 https://vercel.com/blog/build-knowledge-agents-without-embeddings
 https://vercel.com/blog/how-cursor-built-a-growth-iteration-loop-with-vercel-microfrontends-and-flags
 https://vercel.com/blog/how-general-intelligence-used-agents-to-build-an-agent-platform-on-vercel

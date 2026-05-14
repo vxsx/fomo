@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 026 · 14 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px; letter-spacing: 0.18em;
+    text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start; min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none; color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     COVER · DOSSIER GRID — seven numbered cells, no hero masthead.
+     ═══════════════════════════════════════════════════════════════════ */
+  .cover {
+    background: #0e0f12;
+    color: #ece5d3;
+  }
+  .cover .folio { color: #ece5d3; opacity: 0.55; }
+  .cover .main { gap: clamp(20px, 2vw, 32px); }
+  .cover .strap {
+    font-family: var(--mono);
+    font-size: 13px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #d6a93a;
+    border-top: 1px solid rgba(214,169,58,0.4);
+    border-bottom: 1px solid rgba(214,169,58,0.4);
+    padding: 10px 0;
+    width: 100%;
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px 24px;
+  }
+  .cover .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+  }
+  .cover .cell {
+    text-decoration: none; color: inherit;
+    border: 1px solid rgba(236,229,211,0.18);
+    padding: 22px 22px 26px;
+    display: flex; flex-direction: column;
+    gap: 14px;
+    min-height: 220px;
+    background: rgba(255,255,255,0.02);
+    transition: background 0.18s ease, border-color 0.18s ease;
+  }
+  .cover .cell:hover {
+    background: rgba(214,169,58,0.08);
+    border-color: rgba(214,169,58,0.55);
+  }
+  .cover .cell .num {
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.22em;
+    color: #d6a93a;
+  }
+  .cover .cell .frag {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(22px, 2.1vw, 30px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
+  .cover .cell .src {
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .cover .lockup {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(56px, 9vw, 130px);
+    line-height: 0.92;
+    color: #ece5d3;
+    margin: 0;
+    letter-spacing: -0.03em;
+  }
+  .cover .lockup .dot { color: #d6a93a; }
+  @media (max-width: 800px) {
+    .cover .grid { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s01 · DARK REPORT / CLASSIFIED — TanStack supply chain
+     ═══════════════════════════════════════════════════════════════════ */
+  .s01 {
+    background: #11080a;
+    color: #f0e6d2;
+  }
+  .s01 .folio { color: #f0e6d2; opacity: 0.55; }
+  .s01 .tag {
+    color: #ef4a4a; border-color: #ef4a4a;
+    background: rgba(239,74,74,0.08);
+  }
+  .s01 .hed {
+    font-weight: 900;
+    font-variation-settings: "opsz" 144;
+  }
+  .s01 .hed .redact {
+    display: inline-block;
+    background: #ef4a4a;
+    color: #11080a;
+    padding: 0 0.14em;
+    border-radius: 2px;
+    font-style: normal;
+  }
+  .s01 .hed em {
+    font-style: italic;
+    color: #ef4a4a;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s01 .lede { color: #d8c7a3; }
+  .s01 .timeline {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    color: #f0e6d2;
+    border: 1px solid rgba(239,74,74,0.4);
+    padding: 22px 26px;
+    background: rgba(239,74,74,0.04);
+    max-width: 56ch;
+  }
+  .s01 .timeline div {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 18px;
+  }
+  .s01 .timeline span:first-child { color: #ef4a4a; }
+  .s01 .read-on {
+    color: #ef4a4a; border-color: #ef4a4a; --flip: #11080a;
+  }
+  .s01 .decor::before {
+    content: "CONFIDENTIAL";
+    position: absolute;
+    top: 14vw; right: -4vw;
+    font-family: var(--mono);
+    font-size: clamp(80px, 14vw, 220px);
+    letter-spacing: 0.06em;
+    color: rgba(239,74,74,0.06);
+    transform: rotate(-90deg);
+    transform-origin: right top;
+    white-space: nowrap;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s02 · BLUEPRINT — Codex Windows sandbox
+     ═══════════════════════════════════════════════════════════════════ */
+  .s02 {
+    background:
+      linear-gradient(rgba(202,219,237,0) 95%, rgba(15,40,82,0.18) 95%) 0 0 / 100% 32px,
+      linear-gradient(90deg, rgba(202,219,237,0) 95%, rgba(15,40,82,0.18) 95%) 0 0 / 32px 100%,
+      #cadbed;
+    color: #0f2852;
+  }
+  .s02 .folio { color: #0f2852; }
+  .s02 .tag { color: #0f2852; border-color: #0f2852; background: rgba(255,255,255,0.45); }
+  .s02 .hed { font-family: var(--serif); font-weight: 800; color: #0f2852; }
+  .s02 .hed em {
+    font-style: italic; color: #c8431b;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s02 .lede { color: #1a3b73; }
+  .s02 .schematic {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.65;
+    color: #0f2852;
+    background: rgba(255,255,255,0.55);
+    padding: 22px 26px;
+    border: 1px solid #0f2852;
+    max-width: 60ch;
+    position: relative;
+  }
+  .s02 .schematic::before,
+  .s02 .schematic::after {
+    content: ""; position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid #0f2852;
+    background: #cadbed;
+  }
+  .s02 .schematic::before { top: -7px; left: -7px; }
+  .s02 .schematic::after  { bottom: -7px; right: -7px; }
+  .s02 .schematic b { color: #c8431b; font-weight: 600; }
+  .s02 .read-on { color: #0f2852; border-color: #0f2852; --flip: #cadbed; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s03 · CONCRETE — Cloudflare Browser Run
+     ═══════════════════════════════════════════════════════════════════ */
+  .s03 {
+    background: #d6d2c8;
+    color: #1c1a17;
+    position: relative;
+  }
+  .s03 .folio { color: #1c1a17; opacity: 0.55; }
+  .s03 .tag { color: #1c1a17; border-color: #1c1a17; }
+  .s03 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    color: #1c1a17;
+  }
+  .s03 .hed em {
+    font-style: italic;
+    color: #b03a1b;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s03 .lede { color: #2a2620; max-width: 46ch; }
+  .s03 .read-on { color: #1c1a17; border-color: #1c1a17; --flip: #d6d2c8; }
+  .s03 .punct {
+    position: absolute;
+    bottom: -0.18em;
+    right: clamp(-2vw, -3vw, 0vw);
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(360px, 60vw, 880px);
+    line-height: 0.78;
+    color: rgba(176,58,27,0.12);
+    pointer-events: none;
+    user-select: none;
+  }
+  .s03 .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.2vw, 30px);
+    line-height: 1.35;
+    color: #1c1a17;
+    border-left: 4px solid #b03a1b;
+    padding: 4px 0 4px 22px;
+    max-width: 48ch;
+    margin-top: 8px;
+  }
+  .s03 .pull cite {
+    display: block;
+    margin-top: 12px;
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #b03a1b;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s04 · BIG STATS / YELLOW — Vercel AI Gateway production index
+     ═══════════════════════════════════════════════════════════════════ */
+  .s04 {
+    background: #f4d023;
+    color: #1a1a1a;
+  }
+  .s04 .folio { color: #1a1a1a; }
+  .s04 .tag {
+    color: #1a1a1a; border-color: #1a1a1a;
+    background: rgba(0,0,0,0.05);
+  }
+  .s04 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    line-height: 0.95;
+    font-size: clamp(56px, 9vw, 132px);
+  }
+  .s04 .hed .cut {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #f4d023;
+    padding: 0.02em 0.18em 0.06em;
+  }
+  .s04 .lede { font-family: var(--sans); font-style: normal; max-width: 48ch; font-weight: 500; }
+  .s04 .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+    border-top: 4px solid #1a1a1a;
+    padding-top: 22px;
+  }
+  .s04 .stats dt {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+  .s04 .stats dd {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144;
+    font-size: clamp(48px, 6vw, 88px);
+    line-height: 0.95;
+    color: #1a1a1a;
+  }
+  .s04 .stats dd .unit {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.22em;
+    letter-spacing: normal;
+    margin-left: 0.5em;
+    vertical-align: 0.6em;
+    opacity: 0.75;
+  }
+  .s04 .read-on { color: #1a1a1a; border-color: #1a1a1a; --flip: #f4d023; }
+  @media (max-width: 800px) {
+    .s04 .stats { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s05 · ACADEMIC JOURNAL — DeepSeek v4 walkthrough
+     ═══════════════════════════════════════════════════════════════════ */
+  .s05 {
+    background: #f4ede0;
+    color: #1b2a4e;
+  }
+  .s05 .folio { color: #1b2a4e; opacity: 0.65; }
+  .s05 .tag {
+    color: #1b2a4e; border-color: #1b2a4e;
+    font-family: var(--serif); font-style: italic;
+    letter-spacing: 0.14em; text-transform: none;
+  }
+  .s05 .hed {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-variation-settings: "opsz" 144;
+    color: #1b2a4e;
+  }
+  .s05 .hed em {
+    font-style: italic;
+    color: #8b1f1b;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s05 .lede { color: #1b2a4e; max-width: 52ch; }
+  .s05 .body {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 36px;
+    width: 100%;
+    border-top: 1px solid #1b2a4e;
+    padding-top: 22px;
+  }
+  .s05 .body .side {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.45;
+    color: #1b2a4e;
+  }
+  .s05 .body .side .smallcaps {
+    display: block;
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: #8b1f1b;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+  .s05 .body .col {
+    column-count: 2;
+    column-gap: 28px;
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.55;
+    color: #1b2a4e;
+  }
+  .s05 .body .col p { margin: 0 0 12px; }
+  .s05 .read-on {
+    color: #8b1f1b; border-color: #8b1f1b; --flip: #f4ede0;
+  }
+  @media (max-width: 800px) {
+    .s05 .body { grid-template-columns: 1fr; gap: 18px; }
+    .s05 .body .col { column-count: 1; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s06 · RISOGRAPH DUOTONE — generative UI course
+     ═══════════════════════════════════════════════════════════════════ */
+  .s06 {
+    background: #f7efe2;
+    color: #00746b;
+  }
+  .s06 .folio { color: #00746b; opacity: 0.8; }
+  .s06 .tag {
+    color: #d24697; border-color: #d24697;
+    background: rgba(210,70,151,0.06);
+  }
+  .s06 .hed {
+    font-family: var(--serif);
+    font-weight: 900;
+    color: #00746b;
+    text-shadow: 3px 3px 0 rgba(210,70,151,0.85);
+  }
+  .s06 .hed em {
+    font-style: italic;
+    color: #d24697;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    text-shadow: 3px 3px 0 rgba(0,116,107,0.85);
+  }
+  .s06 .lede { color: #00746b; max-width: 50ch; }
+  .s06 .lede em { color: #d24697; font-style: italic; }
+  .s06 .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+  }
+  .s06 .grid .card {
+    border: 2px solid #00746b;
+    padding: 18px 18px 20px;
+    background: rgba(210,70,151,0.05);
+    position: relative;
+  }
+  .s06 .grid .card::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1.5px solid rgba(210,70,151,0.55);
+    pointer-events: none;
+  }
+  .s06 .grid .card h4 {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #d24697;
+    margin: 0 0 8px;
+  }
+  .s06 .grid .card p {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.4;
+    color: #00746b;
+    margin: 0;
+  }
+  .s06 .read-on {
+    color: #d24697; border-color: #d24697; --flip: #f7efe2;
+  }
+  @media (max-width: 800px) {
+    .s06 .grid { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s07 · MIDNIGHT — Zvi cybersecurity + AI governance
+     ═══════════════════════════════════════════════════════════════════ */
+  .s07 {
+    background: radial-gradient(ellipse at top right, #21304d 0%, #0c1424 60%);
+    color: #d9e1f0;
+  }
+  .s07 .folio { color: #d9e1f0; opacity: 0.6; }
+  .s07 .tag {
+    color: #6ec1ff; border-color: #6ec1ff;
+    background: rgba(110,193,255,0.06);
+  }
+  .s07 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    background: linear-gradient(110deg, #ffffff 30%, #6ec1ff 60%, #b58cff 90%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+  .s07 .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s07 .lede { color: #c5cee0; max-width: 50ch; }
+  .s07 .callout {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-left: 3px solid #6ec1ff;
+    padding: 6px 0 6px 22px;
+    max-width: 54ch;
+  }
+  .s07 .callout p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.45;
+    color: #d9e1f0;
+    margin: 0 0 6px;
+  }
+  .s07 .callout cite {
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6ec1ff;
+  }
+  .s07 .read-on { color: #6ec1ff; border-color: #6ec1ff; --flip: #0c1424; }
+  .s07 .decor::before {
+    content: "";
+    position: absolute;
+    left: -10vw; top: -10vw;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(181,140,255,0.18), transparent 70%);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     COLOPHON · NEWSPRINT
+     ═══════════════════════════════════════════════════════════════════ */
+  .colophon {
+    background: #f1ece1;
+    color: #18120a;
+  }
+  .colophon .folio { color: #18120a; opacity: 0.6; }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-variant: small-caps;
+    letter-spacing: 0.02em;
+    color: #18120a;
+    font-size: clamp(48px, 6vw, 90px);
+  }
+  .colophon .hed em {
+    font-style: italic;
+    color: #6b1f14;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede { color: #28201a; max-width: 60ch; }
+  .colophon .meta {
+    column-count: 3;
+    column-gap: 28px;
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.5;
+    color: #18120a;
+    border-top: 2px solid #18120a;
+    border-bottom: 1px solid #18120a;
+    padding: 16px 0;
+    width: 100%;
+  }
+  .colophon .meta h4 {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    color: #6b1f14;
+  }
+  .colophon .meta p { margin: 0 0 14px; }
+  @media (max-width: 800px) {
+    .colophon .meta { column-count: 1; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ───── COVER · Dossier grid ───── -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 026</span>
+    <span>Thursday · 14 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <div class="strap">
+      <span>Daily dossier</span>
+      <span>Seven items · One read</span>
+    </div>
+    <h1 class="lockup">Ephemeris<span class="dot">.</span></h1>
+    <nav class="grid">
+      <a class="cell" href="#s01">
+        <span class="num">№ 01</span>
+        <span class="frag">A code-signing cert rotates at OpenAI.</span>
+        <span class="src">OpenAI · Supply chain</span>
+      </a>
+      <a class="cell" href="#s02">
+        <span class="num">№ 02</span>
+        <span class="frag">Codex finally gets a Windows playpen.</span>
+        <span class="src">OpenAI · Sandboxing</span>
+      </a>
+      <a class="cell" href="#s03">
+        <span class="num">№ 03</span>
+        <span class="frag">Browser Run leaves the Worker, moves into a Container.</span>
+        <span class="src">Cloudflare · Infra</span>
+      </a>
+      <a class="cell" href="#s04">
+        <span class="num">№ 04</span>
+        <span class="frag">Trillions of tokens, hundreds of models, one chart.</span>
+        <span class="src">Vercel · Telemetry</span>
+      </a>
+      <a class="cell" href="#s05">
+        <span class="num">№ 05</span>
+        <span class="frag">DeepSeek v4, read with ninety footnotes.</span>
+        <span class="src">via @seeallochnaya · Research</span>
+      </a>
+      <a class="cell" href="#s06">
+        <span class="num">№ 06</span>
+        <span class="frag">Design systems become tools the model can call.</span>
+        <span class="src">DeepLearning.AI · UI</span>
+      </a>
+      <a class="cell" href="#s07">
+        <span class="num">№ 07</span>
+        <span class="frag">A bad week for both cybersecurity and AI governance.</span>
+        <span class="src">Zvi · Policy</span>
+      </a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ───── s01 · Dark report — TanStack supply chain ───── -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 026</span>
+    <span>01 / 07 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Supply chain</span>
+    <h2 class="hed">The supply chain came for <em>Codex</em>.</h2>
+    <p class="lede">An attacker compromised TanStack on npm and slipped a payload into a dependency Codex's macOS app pulled in. OpenAI rotated its code-signing certificate and is forcing every Codex desktop user to update by 12 June, or the binary stops launching. The post is a tight, useful read on how a 2026-era lab triages a third-party supply-chain incident in public.</p>
+    <div class="figure">
+      <div class="timeline">
+        <div><span>T+00h</span><span>Malicious npm publish detected in TanStack.</span></div>
+        <div><span>T+04h</span><span>Codex macOS build flagged; affected versions pulled.</span></div>
+        <div><span>T+12h</span><span>Code-signing certificate revoked + reissued.</span></div>
+        <div><span>T+24h</span><span>Forced-update window opens. Hard cutoff: 12 Jun 2026.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───── s02 · Blueprint — Codex Windows sandbox ───── -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 026</span>
+    <span>02 / 07 · OpenAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Sandboxing</span>
+    <h2 class="hed">Codex finally gets a <em>Windows</em> playpen.</h2>
+    <p class="lede">For months, "Codex on Windows" meant trusting the agent with your whole filesystem. The new sandbox confines reads/writes to a working directory, blocks outbound network by default, and routes anything else through the existing approval flow. It is the Windows counterpart to the macOS isolation OpenAI shipped earlier this month — and the prerequisite for letting Codex run unattended on a developer box at all.</p>
+    <div class="figure">
+      <pre class="schematic">┌──────────────────────────────────────────────────────┐
+│ codex-host.exe                                       │
+│                                                      │
+│   ┌────────────────────────────┐                     │
+│   │  sandbox · job-object       │ ← <b>fs scoped</b>    │
+│   │                            │                     │
+│   │   agent · child process    │ ← <b>net deny-list</b>│
+│   │   shell · child process    │                     │
+│   └─────────────┬──────────────┘                     │
+│                 │ approval-prompt                    │
+│                 ▼                                    │
+│   <b>operator: allow / deny / always-allow</b>             │
+└──────────────────────────────────────────────────────┘</pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/building-codex-windows-sandbox" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───── s03 · Concrete — Cloudflare Browser Run ───── -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 026</span>
+    <span>03 / 07 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Infra · Browser agents</span>
+    <h2 class="hed">Browser Run leaves the <em>Worker</em>.</h2>
+    <p class="lede">Cloudflare's headless-Chromium service has moved off the Worker isolate model and onto Containers. The upshot is the boring kind that matters for agent pipelines: real persistent disk, longer-running pages, more concurrent tabs per session, and usage limits roughly an order of magnitude higher than before. If your agent's bottleneck was "we keep restarting the browser", read this.</p>
+    <blockquote class="pull">
+      "Pages that previously timed out at 30 seconds now run for as long as you keep them open."
+      <cite>— Cloudflare engineering</cite>
+    </blockquote>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/browser-run-containers/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true">
+    <div class="punct">”</div>
+  </div>
+</section>
+
+<!-- ───── s04 · Big stats / yellow — Vercel AI Gateway ───── -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 026</span>
+    <span>04 / 07 · Vercel</span>
+  </header>
+  <div class="main">
+    <span class="tag">Telemetry · AI traffic</span>
+    <h2 class="hed">What AI traffic <span class="cut">actually</span> looks like.</h2>
+    <p class="lede">Vercel published seven months of AI Gateway data — the routing layer it offers in front of Anthropic, OpenAI, Google, and the rest. The headline is not which model "won"; it is the long-tail shape. Hundreds of distinct models in production, tool calls eating more tokens than chat completions, and a stubborn fraction of traffic that still pins to one vendor for latency reasons alone.</p>
+    <div class="figure">
+      <dl class="stats">
+        <div>
+          <dt>Tokens processed</dt>
+          <dd>5.1<span class="unit">trillion</span></dd>
+        </div>
+        <div>
+          <dt>Distinct models</dt>
+          <dd>340<span class="unit">+</span></dd>
+        </div>
+        <div>
+          <dt>Months of data</dt>
+          <dd>7<span class="unit">months</span></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://vercel.com/blog/ai-gateway-production-index" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───── s05 · Academic — DeepSeek v4 walkthrough ───── -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 026</span>
+    <span>05 / 07 · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Research · Annotated paper</span>
+    <h2 class="hed">DeepSeek v4, page by <em>page</em>.</h2>
+    <p class="lede">An interactive walkthrough of the DeepSeek v4 paper, with roughly ninety inline notes covering the MoE router, attention shape, training regime, and the bits the paper is quiet about. If you have skimmed v4 twice and still feel hand-wavy on its routing changes versus v3, this is the cheapest way to actually understand the diff before your next architecture meeting.</p>
+    <div class="figure">
+      <div class="body">
+        <aside class="side">
+          <span class="smallcaps">Editor's note</span>
+          The annotation format itself is worth noting — the page splits into the paper on one side and a running commentary on the other, with each margin note linkable. It is what an LLM-friendly paper should look like.
+        </aside>
+        <div class="col">
+          <p>Among the things the walkthrough flags: the v4 router is not just a wider v3, the gating is restructured to keep load balancing without explicit auxiliary loss, and the attention head count changes for a reason that the paper underplays. Read the notes attached to figures 3 and 7 first.</p>
+          <p>Best treated as the senior-engineer version of "read the model card." Skim the prose, but stop on the highlighted spans — those are where the paper is hiding something or eliding a design trade-off worth pulling on.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://dsv4.interactive.ikot.blog/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───── s06 · Risograph — Generative UI course ───── -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 026</span>
+    <span>06 / 07 · DeepLearning.AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">UI · Generative interfaces</span>
+    <h2 class="hed">Your design system is a <em>toolbox</em> now.</h2>
+    <p class="lede">A short course on building <em>generative UI</em>: instead of shipping a fixed dashboard, you expose your design system as a set of tools the agent calls to assemble the right view for the user's question. The interesting claim — and it is a claim, not a settled fact — is that the design system stops being human documentation and starts being a typed API the model invokes.</p>
+    <div class="figure">
+      <div class="grid">
+        <div class="card">
+          <h4>Tool 01</h4>
+          <p>Components become callable: <em>Chart</em>, <em>Table</em>, <em>Form</em>, each with a schema.</p>
+        </div>
+        <div class="card">
+          <h4>Tool 02</h4>
+          <p>The agent picks the layout based on intent, not on a screen name.</p>
+        </div>
+        <div class="card">
+          <h4>Tool 03</h4>
+          <p>Edge cases get one-off UIs that can be promoted back into the system.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.deeplearning.ai/short-courses/build-interactive-agents-with-generative-ui/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───── s07 · Midnight — Zvi cybersec + AI governance ───── -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 026</span>
+    <span>07 / 07 · Don't Worry About the Vase</span>
+  </header>
+  <div class="main">
+    <span class="tag">Policy · Cybersecurity</span>
+    <h2 class="hed">A bad week for both <em>defenders</em>.</h2>
+    <p class="lede">Zvi's weekly round-up makes an awkward case: the recent run of npm, Linux-kernel and registry-level incidents is not separate from the AI-governance debate — it is the same problem dressed differently. When the same coding agents are simultaneously shipping fixes and writing the next round of malicious packages, "let the labs self-regulate" reads less like restraint and more like a category error.</p>
+    <div class="figure">
+      <div class="callout">
+        <p>"If we cannot keep the supply chain we already have safe from humans, we are not going to keep it safe from agents at the same prices, on the same staff, with the same incentives."</p>
+        <cite>— Zvi Mowshowitz, 13 May</cite>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://thezvi.substack.com/p/cyber-lack-of-security-and-ai-governance" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ───── Colophon · Newsprint ───── -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 026</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Seven items, picked for the senior engineer or founder with ten minutes before the first meeting. Two flavours of sandboxing, one large-scale telemetry release, a paper walkthrough, a UI shift, and a policy read to close.</p>
+    <div class="meta">
+      <h4>Sources today</h4>
+      <p>OpenAI · Cloudflare · Vercel · DeepLearning.AI · Don't Worry About the Vase · @seeallochnaya.</p>
+      <h4>Rubric</h4>
+      <p>Tools worth adopting this week · creative software · dev &amp; agentic coding · privacy &amp; security · research with a practical kernel.</p>
+      <h4>Issue</h4>
+      <p>Number 026 · Thursday, 14 May 2026 · Europe/Zürich. Next issue lands tomorrow at 08:00 local.</p>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
