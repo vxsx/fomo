@@ -13,6 +13,7 @@ https://anthropic.com/features/project-deal
 https://anthropic.com/news/anthropic-amazon-compute
 https://anthropic.com/news/claude-design-anthropic-labs
 https://anthropic.com/news/claude-for-creative-work
+https://anthropic.com/news/claude-for-small-business
 https://anthropic.com/news/claude-opus-4-7
 https://anthropic.com/news/election-safeguards-update
 https://anthropic.com/news/finance-agents
@@ -51,6 +52,7 @@ https://deeplearning.ai/the-batch/issue-349
 https://deeplearning.ai/the-batch/issue-350
 https://deeplearning.ai/the-batch/issue-351
 https://deeplearning.ai/the-batch/issue-352
+https://deeplearning.ai/the-batch/issue-353
 https://developers.openai.com/ads
 https://dsv4.interactive.ikot.blog
 https://dsv4.interactive.ikot.blog/
@@ -121,6 +123,7 @@ https://openai.com/index/introducing-workspace-agents-in-chatgpt
 https://openai.com/index/mrc-supercomputer-networking
 https://openai.com/index/open-source-codex-orchestration-symphony
 https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack
+https://openai.com/index/personal-finance-chatgpt
 https://openai.com/index/running-codex-safely
 https://openai.com/index/speeding-up-agentic-workflows-with-websockets
 https://openai.com/index/testing-ads-in-chatgpt
@@ -154,8 +157,11 @@ https://shir-man.com/free-llm
 https://sierra.ai/blog/the-ai-native-interview
 https://t.me/ProductsAndStartups/1740
 https://t.me/ProductsAndStartups/1745
+https://t.me/ProductsAndStartups/1748
 https://t.me/rvnikita_blog/1735
 https://t.me/s/denissexy
+https://t.me/TochkiNadAI/2324
+https://telegram.org/blog/ai-bot-revolution-11-new-features
 https://therundown.ai/p/openai-superapp-hiding-inside-codex
 https://thezvi.substack.com/p/ai-165-in-our-image
 https://thezvi.substack.com/p/ai-166-google-sells-out
@@ -165,6 +171,7 @@ https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding
 https://thezvi.substack.com/p/claude-code-codex-and-agentic-coding-f54
 https://thezvi.substack.com/p/cyber-lack-of-security-and-ai-governance
 https://thezvi.substack.com/p/gpt-55-capabilities-and-reactions
+https://thezvi.substack.com/p/monthly-roundup-42-may-2026
 https://thezvi.substack.com/p/opus-47-part-2-capabilities-and-reactions
 https://thezvi.substack.com/p/opus-47-part-3-model-welfare
 https://thezvi.substack.com/p/the-ai-ad-hoc-prior-restraint-era
@@ -186,6 +193,7 @@ https://vercel.com/blog/making-turborepo-ninety-six-percent-faster-with-agents-s
 https://vercel.com/blog/optimizing-vercel-sandbox-snapshots
 https://vercel.com/blog/we-ralph-wiggumed-webstreams-to-make-them-10x-faster
 https://vercel.com/blog/zdr-on-ai-gateway
+https://wheresyoured.at/where-are-all-the-data-centers
 https://x.com/andonlabs/status/2042765807781056646
 https://xbow.com/blog/mythos-offensive-security-xbow-evaluation
 https://youtu.be/xmkSf5IS-zw
