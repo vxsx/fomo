@@ -19,6 +19,8 @@ https://anthropic.com/news/election-safeguards-update
 https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
 https://anthropic.com/research/claude-personal-guidance
+https://anthropic.com/research/natural-language-autoencoders
+https://anthropic.com/research/teaching-claude-why
 https://arxiv.org/abs/2509.00462
 https://arxiv.org/abs/2604.20779
 https://arxiv.org/pdf/2604.24827
@@ -81,7 +83,9 @@ https://github.com/BayramAnnakov/ai-native-product-skills/tree/master/skills/aut
 https://github.com/BayramAnnakov/ai-personal-os-skills/tree/main/skills/slide-inspector
 https://github.com/BayramAnnakov/factory-agent
 https://github.com/BayramAnnakov/token-audit-skill
+https://github.com/BayramAnnakov/whimsical-strategies-skill
 https://github.com/deepseek-ai/Thinking-with-Visual-Primitives
+https://github.com/DenisSergeevitch/agents-best-practices
 https://github.com/DenisSergeevitch/chatgpt-portal
 https://github.com/DenisSergeevitch/genternet-chrome
 https://github.com/DenisSergeevitch/UFO-USA
@@ -90,6 +94,7 @@ https://github.com/oven-sh/bun/pull/30412
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://hackernews.foresyn.ai/
 https://higgsfield.ai/mcp
+https://huggingface.co/blog/mishig/local-moores-law
 https://huggingface.co/collections/talkie-lm/talkie-13b
 https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
 https://jack-clark.net/2026/03/23/import-ai-450-chinas-electronic-warfare-model-traumatized-llms-and-a-scaling-law-for-cyberattacks
@@ -98,8 +103,10 @@ https://jack-clark.net/2026/04/13/import-ai-453-breaking-ai-agents-mirrorcode-an
 https://jack-clark.net/2026/04/20/import-ai-454-automating-alignment-research-safety-study-of-a-chinese-model-hifloat4
 https://jack-clark.net/2026/05/04/import-ai-455-automating-ai-research
 https://jack-clark.net/2026/05/11/import-ai-456-rsi-and-economic-growth-radical-optionality-for-ai-regulation-and-a-neural-computer
+https://jeffbullas.com/ideas-die-unseen
 https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
+https://krea.ai/
 https://mf0.ai/
 https://nextjs.org/blog/agentic-future
 https://nextjs.org/blog/next-16-2
@@ -155,6 +162,7 @@ https://sentry.io/blog/nextjs-supabase-observability
 https://sentry.io/blog/scaling-observability-for-multi-agent-ai-systems
 https://shir-man.com/free-llm
 https://sierra.ai/blog/the-ai-native-interview
+https://simonwillison.net/2026/May/14/not-so-locked-in
 https://t.me/ProductsAndStartups/1740
 https://t.me/ProductsAndStartups/1745
 https://t.me/ProductsAndStartups/1748
