@@ -45,6 +45,7 @@ https://blog.cloudflare.com/q1-2026-internet-disruption-summary
 https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/shared-dictionaries
 https://blog.cloudflare.com/unweight-tensor-compression
+https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
 https://claude.com/blog/agent-view-in-claude-code
 https://claude.com/blog/connectors-for-everyday-life
@@ -93,6 +94,7 @@ https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
 https://github.com/oven-sh/bun/pull/30412
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://hackernews.foresyn.ai/
+https://higgsfield.ai/apps/virality-predictor
 https://higgsfield.ai/mcp
 https://huggingface.co/blog/mishig/local-moores-law
 https://huggingface.co/collections/talkie-lm/talkie-13b
@@ -108,15 +110,18 @@ https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
 https://krea.ai/
 https://mf0.ai/
+https://microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale
 https://nextjs.org/blog/agentic-future
 https://nextjs.org/blog/next-16-2
 https://nextjs.org/blog/next-16-2-ai
 https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/turbopack-incremental-computation
+https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
 https://openai.com/index/building-codex-windows-sandbox
 https://openai.com/index/codex-for-almost-everything
 https://openai.com/index/cybersecurity-in-the-intelligence-age
+https://openai.com/index/databricks
 https://openai.com/index/delivering-low-latency-voice-ai-at-scale
 https://openai.com/index/gpt-5-5-instant
 https://openai.com/index/gpt-5-5-system-card
@@ -185,6 +190,7 @@ https://thezvi.substack.com/p/opus-47-part-3-model-welfare
 https://thezvi.substack.com/p/the-ai-ad-hoc-prior-restraint-era
 https://thezvi.substack.com/p/the-most-important-charts-in-the
 https://thezvi.substack.com/p/what-is-anthropic
+https://v0.app/
 https://vercel.com/blog/a-new-programming-model-for-durable-execution
 https://vercel.com/blog/agent-responsibly
 https://vercel.com/blog/agentic-infrastructure

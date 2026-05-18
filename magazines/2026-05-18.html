@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 030 · 18 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { overflow-wrap: break-word; margin: 0; }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+  .spread > .decor {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .spread > .folio {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px 24px; flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px; letter-spacing: 0.18em;
+    text-transform: uppercase; opacity: 0.75;
+  }
+  .spread > .main {
+    display: flex; flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center; align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+  .figure { width: 100%; }
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600; font-size: 15px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none; color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed   { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede  { font-size: 18px; line-height: 1.5; }
+    .tag   { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     COVER — date-hero treatment. The day is the visual.
+     ═══════════════════════════════════════════════════════════════════ */
+  .cover {
+    background: #f1e9d8;
+    color: #181410;
+  }
+  .cover .main { gap: clamp(20px, 2vw, 36px); }
+  .cover .date-hero {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(74px, 17vw, 280px);
+    line-height: 0.84;
+    letter-spacing: -0.04em;
+    color: #2a1c10;
+    padding-bottom: 0.14em;
+    margin: 0;
+  }
+  .cover .date-hero .mid {
+    font-style: normal;
+    color: #b7522c;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  }
+  .cover .strap {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(14px, 1.2vw, 17px);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #b7522c;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 20px;
+    border-top: 1px solid #181410;
+    width: 100%;
+    max-width: 1100px;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(24,20,16,0.28);
+    font-family: var(--serif);
+    font-size: clamp(16px, 1.3vw, 19px);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  {
+    flex: 0 0 auto;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .cover .toc .num {
+    font-family: var(--serif); font-weight: 700; font-style: italic;
+    color: #b7522c; margin-right: 12px;
+    font-variation-settings: "opsz" 144;
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .date-hero { font-size: clamp(56px, 16vw, 110px); }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s02 — Hero / editorial cream. Sky-to-sunset gradient as decor.
+     ═══════════════════════════════════════════════════════════════════ */
+  .s02 {
+    background: #f1e9d8;
+    color: #181410;
+  }
+  .s02 .tag { color: #6b1f14; border-color: #6b1f14; }
+  .s02 .hed {
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+  }
+  .s02 .hed em {
+    font-style: italic;
+    color: #b7522c;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s02 .read-on { color: #6b1f14; border-color: #6b1f14; --flip: #f1e9d8; }
+  .s02 .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.2vw, 30px);
+    line-height: 1.4;
+    color: #2a1c10;
+    border-left: 3px solid #b7522c;
+    padding: 4px 0 4px 18px;
+    max-width: 50ch;
+  }
+  .s02 .decor::before {
+    content: "";
+    position: absolute;
+    right: -6vw; bottom: -18vw;
+    width: 70vw; height: 70vw;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%,
+      rgba(255,170,80,0.55) 0%,
+      rgba(220,90,40,0.30) 28%,
+      rgba(40,30,90,0.12) 62%,
+      transparent 72%);
+    filter: blur(2px);
+  }
+  .s02 .decor::after {
+    content: "";
+    position: absolute;
+    left: -8vw; top: -16vw;
+    width: 64vw; height: 64vw;
+    background: radial-gradient(circle at 60% 60%,
+      rgba(80,120,200,0.20) 0%,
+      transparent 65%);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s03 — Hot pink, sans heavy. Virality grid.
+     ═══════════════════════════════════════════════════════════════════ */
+  .s03 {
+    background: #ff3fa4;
+    color: #16030e;
+  }
+  .s03 .tag { color: #16030e; border-color: #16030e; background: rgba(255,255,255,0.18); }
+  .s03 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(48px, 8.5vw, 124px);
+    letter-spacing: -0.035em;
+    line-height: 0.96;
+    text-transform: uppercase;
+  }
+  .s03 .hed em {
+    font-style: italic;
+    font-family: var(--serif);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #ffe7f1;
+    text-transform: none;
+    font-weight: 800;
+  }
+  .s03 .lede { color: #16030e; }
+  .s03 .read-on {
+    color: #16030e; border-color: #16030e;
+    background: #ffe7f1; --flip: #ff3fa4;
+  }
+  .s03 .scores {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    max-width: 880px;
+  }
+  .s03 .score {
+    background: #16030e;
+    color: #ffe7f1;
+    padding: 18px 16px 16px;
+    border-radius: 4px;
+  }
+  .s03 .score .n {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1;
+    color: #ff8fc5;
+    font-variation-settings: "opsz" 144;
+    letter-spacing: normal;
+  }
+  .s03 .score .l {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    opacity: 0.8;
+  }
+  @media (max-width: 800px) {
+    .s03 .scores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .s03 .hed { font-size: clamp(34px, 11vw, 56px); }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s04 — Dark report / classified. Crimson on near-black, redaction bars.
+     ═══════════════════════════════════════════════════════════════════ */
+  .s04 {
+    background: #0a0707;
+    color: #e6dcd1;
+  }
+  .s04 .tag { color: #d9484a; border-color: #d9484a; }
+  .s04 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(36px, 5.4vw, 76px);
+    line-height: 1.08;
+    letter-spacing: -0.005em;
+    color: #f4e7d8;
+  }
+  .s04 .hed .redact {
+    background: #d9484a;
+    color: transparent;
+    padding: 0 0.18em;
+    margin: 0 0.04em;
+    user-select: none;
+  }
+  .s04 .hed em {
+    font-style: normal;
+    color: #d9484a;
+  }
+  .s04 .lede {
+    font-family: var(--serif);
+    color: #c5b9a8;
+  }
+  .s04 .read-on { color: #f4e7d8; border-color: #d9484a; --flip: #0a0707; }
+  .s04 .read-on:hover { background: #d9484a; }
+  .s04 .memo {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+    color: #c5b9a8;
+    border: 1px solid #2a1818;
+    background: rgba(217,72,74,0.04);
+    padding: 18px 22px;
+    width: 100%;
+    max-width: 660px;
+  }
+  .s04 .memo .k { color: #d9484a; letter-spacing: 0.08em; }
+  .s04 .memo .bar {
+    display: inline-block; height: 0.9em;
+    background: #d9484a;
+    margin: 0 2px;
+    vertical-align: -0.05em;
+  }
+  .s04 .decor::before {
+    content: "CLASSIFIED // MSR-2026-05";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-22deg);
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(40px, 7vw, 120px);
+    color: rgba(217,72,74,0.06);
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+  }
+  .s04 .decor::after {
+    content: "";
+    position: absolute;
+    inset: 22px;
+    border: 1px solid rgba(217,72,74,0.18);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s05 — Terminal. Mono everywhere, scanlines.
+     ═══════════════════════════════════════════════════════════════════ */
+  .s05 {
+    background: #04130a;
+    color: #b6f5c5;
+  }
+  .s05 .tag { color: #6cff9a; border-color: #6cff9a; }
+  .s05 .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(38px, 5.6vw, 80px);
+    line-height: 1.08;
+    letter-spacing: -0.005em;
+    color: #d6ffe2;
+  }
+  .s05 .hed .caret::after {
+    content: "_";
+    color: #6cff9a;
+    margin-left: 0.05em;
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .s05 .lede { font-family: var(--mono); color: #b6f5c5; font-size: 17px; max-width: 60ch; }
+  .s05 .read-on { color: #6cff9a; border-color: #6cff9a; --flip: #04130a; }
+  .s05 .term {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.65;
+    color: #b6f5c5;
+    background: #02100a;
+    border: 1px solid #1a3a26;
+    padding: 18px 22px;
+    width: 100%;
+    max-width: 720px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .s05 .term .p { color: #6cff9a; }
+  .s05 .term .c { color: #6a9080; }
+  .s05 .term .h { color: #f0e68a; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, rgba(108,255,154,0.04) 0 1px, transparent 1px 3px);
+    pointer-events: none;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s06 — Big stats yellow. Giant numeral.
+     ═══════════════════════════════════════════════════════════════════ */
+  .s06 {
+    background: #ffd400;
+    color: #0a0a0a;
+  }
+  .s06 .tag { color: #0a0a0a; border-color: #0a0a0a; background: rgba(255,255,255,0.25); }
+  .s06 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-size: clamp(50px, 8vw, 116px);
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+  .s06 .read-on { color: #0a0a0a; border-color: #0a0a0a; --flip: #ffd400; }
+  .s06 .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 36px;
+    width: 100%;
+    max-width: 880px;
+    border-top: 3px solid #0a0a0a;
+    padding-top: 22px;
+  }
+  .s06 .stats .num {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: 0.92;
+    color: #0a0a0a;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    letter-spacing: -0.02em;
+  }
+  .s06 .stats .num .unit {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.32em;
+    letter-spacing: normal;
+    margin-left: 0.18em;
+    vertical-align: 0.4em;
+  }
+  .s06 .stats dt {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    opacity: 0.75;
+  }
+  @media (max-width: 800px) {
+    .s06 .stats { grid-template-columns: 1fr; gap: 18px; }
+    .s06 .hed { font-size: clamp(36px, 11vw, 60px); }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     s07 — Spreadsheet. Mono tabular, gridlines.
+     ═══════════════════════════════════════════════════════════════════ */
+  .s07 {
+    background: #e8e6e0;
+    color: #1a1a1a;
+  }
+  .s07 .tag { color: #1a1a1a; border-color: #1a1a1a; background: #fff; }
+  .s07 .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(44px, 6.4vw, 94px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+  .s07 .hed em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: #2c4a3a;
+  }
+  .s07 .read-on { color: #1a1a1a; border-color: #1a1a1a; --flip: #e8e6e0; }
+  .s07 .sheet {
+    font-family: var(--mono);
+    font-size: 14px;
+    width: 100%;
+    max-width: 760px;
+    border-collapse: collapse;
+    background: #fbfaf6;
+    border: 1px solid #b8b4a8;
+  }
+  .s07 .sheet th, .s07 .sheet td {
+    border: 1px solid #c4c0b4;
+    padding: 9px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .s07 .sheet th {
+    background: #d8d5cc;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .s07 .sheet td .row-id {
+    color: #6c6a60;
+    font-weight: 600;
+    padding-right: 10px;
+  }
+  .s07 .sheet td.ok { color: #2c4a3a; font-weight: 600; }
+  @media (max-width: 800px) {
+    .s07 .sheet { font-size: 12px; }
+    .s07 .sheet th, .s07 .sheet td { padding: 7px 8px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     Colophon — museum placard. Ivory + olive, centered, classical.
+     ═══════════════════════════════════════════════════════════════════ */
+  .colophon {
+    background: #efe9d8;
+    color: #2a2a22;
+  }
+  .colophon .hed {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-size: clamp(48px, 7vw, 96px);
+    color: #3b4a2a;
+    letter-spacing: 0.005em;
+  }
+  .colophon .hed em {
+    font-style: normal;
+    color: #2a2a22;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .colophon .lede {
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.4vw, 22px);
+    color: #2a2a22;
+    max-width: 60ch;
+  }
+  .colophon .placard {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #3b4a2a;
+    border-top: 1px solid #3b4a2a;
+    border-bottom: 1px solid #3b4a2a;
+    padding: 10px 0;
+    width: fit-content;
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COVER — date-hero
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 030</span>
+    <span>Monday · 18 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <span class="strap">Monday Edition · Vol. 030</span>
+    <h1 class="date-hero">MON <span class="mid">18</span> MAY <em>26</em></h1>
+    <p class="lede" style="max-width: 38ch;">Today's issue is about the loop closing: tools that watch what they make, agents that critique their own renders, and frameworks for breaking the ones that don't look.</p>
+    <nav class="toc">
+      <a href="#s02"><span><span class="num">02</span>Sunlight, scattered in arithmetic.</span><span>Maxime Heckel · via @denissexy</span></a>
+      <a href="#s03"><span><span class="num">03</span>What goes viral, before it goes live.</span><span>Higgsfield · via @TochkiNadAI</span></a>
+      <a href="#s04"><span><span class="num">04</span>To break the agent, send it Geneva Coffee.</span><span>Microsoft Research · via @ProductsAndStartups</span></a>
+      <a href="#s05"><span><span class="num">05</span>v0 opens the page itself now.</span><span>v0 · via @TochkiNadAI</span></a>
+      <a href="#s06"><span><span class="num">06</span>OfficeQA Pro, cleared.</span><span>OpenAI × Databricks</span></a>
+      <a href="#s07"><span><span class="num">07</span>Codex writes the KPI memo first.</span><span>OpenAI Academy</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     02 — Maxime Heckel: rendering the sky
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 030</span>
+    <span>02 / 07 · Maxime Heckel · via @denissexy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Graphics · Creative software</span>
+    <h2 class="hed">Sunlight, scattered in <em>arithmetic.</em></h2>
+    <p class="lede">A working WebGL tutorial on atmospheric scattering — how light bends through air to produce a daylight blue, a sunset orange, and the dim violet edge of a planet's terminator. Every horizon in a render starts as a single integral.</p>
+    <div class="figure">
+      <p class="pull">"The sky is not painted. It is integrated. Each pixel asks the same physics question across the whole atmosphere — and the camera shrugs back an answer in milliseconds."</p>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     03 — Higgsfield Virality Predictor
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 030</span>
+    <span>03 / 07 · Higgsfield · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative AI · Short video</span>
+    <h2 class="hed">What goes viral, <em>before</em> it goes live.</h2>
+    <p class="lede">Higgsfield's Virality Predictor takes a clip under fifteen seconds and grades it: hook strength, retention curve, virality score, and a heat-map of which parts of the brain light up while watching. A critic that sees the video before the audience does.</p>
+    <div class="figure">
+      <div class="scores">
+        <div class="score"><div class="n">87</div><span class="l">Hook</span></div>
+        <div class="score"><div class="n">62%</div><span class="l">Retention</span></div>
+        <div class="score"><div class="n">A−</div><span class="l">Virality</span></div>
+        <div class="score"><div class="n">3.2</div><span class="l">Brain peak</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://higgsfield.ai/apps/virality-predictor" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     04 — Microsoft Research: whimsical adversarial strategies
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 030</span>
+    <span>04 / 07 · Microsoft Research · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agent security · Adversarial</span>
+    <h2 class="hed">To break the agent, send it the <em>Geneva Coffee Convention.</em></h2>
+    <p class="lede">Microsoft Research finds that absurd cross-domain analogies slip past safety filters where conventional jailbreaks fail. The training set never anticipated whimsy: a fictional treaty, a made-up protocol, a polite request framed as bureaucracy. The agent complies.</p>
+    <div class="figure">
+      <div class="memo">
+<span class="k">FROM:</span> Microsoft Research · 2026<br>
+<span class="k">SUBJECT:</span> Whimsical Strategies <span class="bar" style="width:6em"></span><br>
+<span class="k">METHOD:</span> Out-of-distribution adversarial generation, at scale<br>
+<span class="k">FINDING:</span> Cross-domain analogy <span class="bar" style="width:3em"></span> bypasses filters <span class="bar" style="width:5em"></span><br>
+<span class="k">IMPLICATION:</span> Refusal training is mode-specific; humour is a mode.
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.microsoft.com/en-us/research/articles/whimsical-strategies-break-ai-agents-generating-out-of-distribution-adversarial-strategies-at-scale/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     05 — v0 Browser Use
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 030</span>
+    <span>05 / 07 · v0 · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Dev tools · Agentic UI</span>
+    <h2 class="hed">v0 opens the page <span class="caret">itself now.</span></h2>
+    <p class="lede">v0's new Browser Use feature opens its own preview, screenshots it, critiques the design, and patches bugs before you load the URL. The agent gets eyes; the loop closes inside the loop.</p>
+    <div class="figure">
+      <div class="term"><span class="p">$</span> v0 deploy --browser-use
+<span class="c"># spawning preview at https://v0.app/preview/30a4...</span>
+<span class="h">[v0]</span> opening preview in headless chromium
+<span class="h">[v0]</span> screenshot captured (1440x900)
+<span class="h">[v0]</span> critique: hero CTA below the fold on mobile
+<span class="h">[v0]</span> patch: tighten section padding, raise CTA
+<span class="h">[v0]</span> rerender → screenshot → diff
+<span class="h">[v0]</span> ok. <span class="c">// 3 issues caught before first human view</span>
+<span class="p">$</span> _</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://v0.app/" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     06 — OpenAI × Databricks
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 030</span>
+    <span>06 / 07 · OpenAI · Databricks</span>
+  </header>
+  <div class="main">
+    <span class="tag">Enterprise AI · Benchmark</span>
+    <h2 class="hed">OfficeQA Pro, cleared.</h2>
+    <p class="lede">Databricks rolls GPT-5.5 into enterprise agent workflows after the model topped a benchmark built around real warehouse questions. Data and reasoning, finally on the same side of the wire.</p>
+    <div class="figure">
+      <dl class="stats">
+        <div>
+          <div class="num">5<span class="unit">.5</span></div>
+          <dt>GPT version inside the agent</dt>
+        </div>
+        <div>
+          <div class="num">1<span class="unit">st</span></div>
+          <dt>Model to clear OfficeQA Pro</dt>
+        </div>
+        <div>
+          <div class="num">May<span class="unit">15</span></div>
+          <dt>Date the integration went live</dt>
+        </div>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/index/databricks" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     07 — OpenAI Codex for data science
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 030</span>
+    <span>07 / 07 · OpenAI Academy</span>
+  </header>
+  <div class="main">
+    <span class="tag">Agentic coding · Playbook</span>
+    <h2 class="hed">Codex writes the <em>KPI memo</em> first.</h2>
+    <p class="lede">OpenAI's playbook for data science teams catalogs the dull parts Codex now drafts before the first SELECT: root-cause briefs, impact readouts, KPI memos, scoped analyses, dashboard specs. The plumbing of an analytics function, written by the agent that will later run the queries.</p>
+    <div class="figure">
+      <table class="sheet">
+        <thead><tr><th>Artifact</th><th>Drafted by Codex</th><th>Human edits</th></tr></thead>
+        <tbody>
+          <tr><td><span class="row-id">01</span>Root-cause brief</td><td class="ok">first pass</td><td>tighten causal claims</td></tr>
+          <tr><td><span class="row-id">02</span>Impact readout</td><td class="ok">first pass</td><td>verify the lift number</td></tr>
+          <tr><td><span class="row-id">03</span>KPI memo</td><td class="ok">first pass</td><td>strike scope creep</td></tr>
+          <tr><td><span class="row-id">04</span>Scoped analysis</td><td class="ok">first pass</td><td>pick the cohort</td></tr>
+          <tr><td><span class="row-id">05</span>Dashboard spec</td><td class="ok">first pass</td><td>name the chart owner</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex" target="_blank" rel="noopener"><span>Read on →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     COLOPHON — museum placard
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="spread colophon centered" id="colophon">
+  <header class="folio">
+    <span>End of Issue 030</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <span class="placard">Ephemeris · Daily, 08:00 Zürich</span>
+    <h3 class="hed">Six stories. <em>One Monday.</em></h3>
+    <p class="lede">Today's picks drew from Maxime Heckel (via @denissexy), Higgsfield (via @TochkiNadAI), Microsoft Research (via @ProductsAndStartups), v0 (via @TochkiNadAI), and OpenAI Academy. The rubric favours AI tools you could try this week, creative software with a working kernel, and dev primitives that shorten the loop.</p>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>
