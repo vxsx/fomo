@@ -38,8 +38,7 @@ fi
 # Run the agent. It will fetch sources, render the issue, commit, push, notify.
 #   --print            : headless, non-interactive
 #   --permission-mode  : auto-approve file/bash ops (cron has no human)
-#   --max-turns        : guardrail against runaway loops
-#   --max-budget-usd   : dollar cap per run
+#   --model / --effort : opus + xhigh for best magazine-quality output
 PROMPT="$(cat daily-prompt.md)
 
 You are running non-interactively via launchd. Today's date is $DATE_LOCAL (Europe/Zurich). Do the full build now: fetch, select, render, commit, push, notify. Report back in ≤80 words."
@@ -47,8 +46,8 @@ You are running non-interactively via launchd. Today's date is $DATE_LOCAL (Euro
 /Users/vadim/.local/bin/claude \
   --print \
   --permission-mode bypassPermissions \
-  --max-turns 60 \
-  --max-budget-usd 5 \
+  --model opus \
+  --effort xhigh \
   --output-format text \
   "$PROMPT" >> "$LOG_FILE" 2>&1
 

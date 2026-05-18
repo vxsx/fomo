@@ -382,6 +382,12 @@ story count — so "04 / 07" on a 7-story issue), tag, headline, lede,
 secondary visual element (pull quote, stats, terminal, graph, grid, etc.),
 and a `.read-on` button pointing at the article URL.
 
+**Story numbering starts at 01, not 02.** The cover is `id="cover"` and is
+not a numbered story. The first story is `s01` / folio `01 / N` / TOC entry
+`01`. Issues 029 and 030 incorrectly started at `s02` because the cover was
+counted as 01 — do not repeat this. TOC, `#sNN` ids, `.sNN` classes, and
+folio numerators must all begin at 01 and run contiguously to N.
+
 **Colophon spread** lists sources, rubric, and the issue number — can and
 should vary visually (dark on one issue, newsprint on another).
 **Do not name the fonts, say "hand-laid", or narrate how the issue was
