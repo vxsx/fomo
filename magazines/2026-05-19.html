@@ -1,0 +1,1123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ephemeris · Issue 031 · 19 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: "Fraunces", ui-serif, Georgia, serif;
+    --sans:  "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    background: #0b0b0b;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+  img { max-width: 100%; display: block; }
+
+  .spread {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 6vw, 100px) clamp(24px, 6vw, 120px) clamp(56px, 5vw, 80px);
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: clamp(28px, 3vw, 48px);
+    isolation: isolate;
+  }
+  .spread > .folio,
+  .spread > .main,
+  .spread > .cta { position: relative; z-index: 1; }
+
+  .spread > .decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spread > .folio {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .spread > .main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+    justify-content: safe center;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .spread > .main > * { max-width: 100%; }
+
+  .spread > .cta { align-self: start; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+
+  .hed {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.12em;
+    word-break: break-word;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 50ch;
+    margin: 0;
+  }
+
+  .figure { width: 100%; }
+
+  .read-on {
+    display: inline-block;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 22px;
+    border: 2px solid currentColor;
+    text-decoration: none;
+    color: currentColor;
+    --flip: #0b0b0b;
+  }
+  .read-on:hover { background: currentColor; }
+  .read-on:hover span { color: var(--flip); }
+
+  @media (max-width: 800px) {
+    .spread {
+      padding: max(44px, env(safe-area-inset-top) + 20px)
+               22px
+               max(40px, env(safe-area-inset-bottom) + 20px);
+      gap: 24px;
+    }
+    .hed    { font-size: clamp(36px, 9vw, 58px); line-height: 1.05; }
+    .lede   { font-size: 18px; line-height: 1.5; }
+    .tag    { font-size: 11px; letter-spacing: 0.18em; }
+    .read-on { font-size: 13px; padding: 12px 18px; }
+  }
+
+  .spread.centered > .main         { align-items: center; text-align: center; }
+  .spread.centered > .main .figure { display: flex; justify-content: center; }
+  .spread.centered > .main .figure > * { margin-inline: auto; }
+  .spread.centered > .cta          { justify-self: center; }
+  .spread.centered > .folio        { justify-content: center; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     THEME OVERRIDES — Issue 031 · Single-word mood: AUDITS.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ─── Cover · single-word mood ─── */
+  .cover {
+    background: #050505;
+    color: #f3ead7;
+  }
+  .cover .mood {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+    font-size: clamp(96px, 22vw, 320px);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: #e0464b;
+    padding-bottom: 0.18em;
+    margin: 0;
+  }
+  .cover .mood::after {
+    content: ".";
+    color: #f3ead7;
+  }
+  .cover .strap {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #e0464b;
+    opacity: 0.95;
+    margin: 0;
+  }
+  .cover .dek {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.3;
+    max-width: 36ch;
+    color: rgba(243,234,215,0.78);
+    margin: 0;
+  }
+  .cover .toc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 40px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(243,234,215,0.25);
+    width: 100%;
+  }
+  .cover .toc a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    text-decoration: none; color: inherit;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(243,234,215,0.20);
+  }
+  .cover .toc a > span:first-child { flex: 1 1 auto; min-width: 0; }
+  .cover .toc a > span:last-child  { flex: 0 0 auto; font-size: 0.85em; opacity: 0.6; font-family: var(--mono); letter-spacing: 0.05em; }
+  .cover .toc .num {
+    font-family: var(--mono); font-weight: 600;
+    color: #e0464b; margin-right: 10px;
+  }
+  .cover .folio { color: rgba(243,234,215,0.55); }
+  .cover .decor::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(224,70,75,0.25) 30%, rgba(224,70,75,0.25) 70%, transparent);
+  }
+  @media (max-width: 800px) {
+    .cover .toc { grid-template-columns: 1fr; gap: 0; }
+    .cover .mood { font-size: clamp(72px, 28vw, 180px); }
+  }
+
+  /* ─── s01 · Neon cyberpunk · AI Stuxnet / Cursed Muon ─── */
+  .s01 {
+    background: linear-gradient(135deg, #0a0418 0%, #110b2b 60%, #0a0418 100%);
+    color: #d6f5ee;
+  }
+  .s01 .tag {
+    color: #67ffe8;
+    border-color: rgba(103,255,232,0.55);
+    background: rgba(103,255,232,0.04);
+  }
+  .s01 .hed {
+    background: linear-gradient(92deg, #67ffe8 0%, #b67dff 60%, #ff5fa2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .s01 .hed em {
+    font-style: italic;
+    background: linear-gradient(92deg, #ff5fa2 0%, #ffe066 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .s01 .lede { color: rgba(214,245,238,0.86); }
+  .s01 .terminal {
+    font-family: var(--mono);
+    font-size: clamp(13px, 1vw, 15px);
+    line-height: 1.65;
+    background: #050214;
+    border: 1px solid rgba(103,255,232,0.30);
+    box-shadow: 0 0 0 1px rgba(182,125,255,0.20) inset,
+                0 20px 60px -20px rgba(103,255,232,0.20);
+    padding: 22px 24px;
+    color: #67ffe8;
+    border-radius: 6px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .s01 .terminal .cmt { color: #ffe066; }
+  .s01 .terminal .key { color: #ff5fa2; }
+  .s01 .terminal .var { color: #b67dff; }
+  .s01 .read-on { color: #67ffe8; border-color: #67ffe8; --flip: #050214; }
+  .s01 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px),
+      radial-gradient(60vw 60vw at 100% 0%, rgba(103,255,232,0.10), transparent 60%),
+      radial-gradient(50vw 50vw at 0% 100%, rgba(182,125,255,0.10), transparent 65%);
+  }
+
+  /* ─── s02 · Dark report / classified · Cloudflare Glasswing ─── */
+  .s02 {
+    background: #0e0a09;
+    color: #f5ece4;
+  }
+  .s02 .tag {
+    color: #f5b78a;
+    border-color: rgba(245,183,138,0.55);
+    background: rgba(245,183,138,0.05);
+  }
+  .s02 .hed { color: #f5ece4; }
+  .s02 .hed em {
+    font-style: italic;
+    color: #ff5d4a;
+    background: linear-gradient(transparent 62%, rgba(255,93,74,0.18) 62%, rgba(255,93,74,0.18) 92%, transparent 92%);
+  }
+  .s02 .lede { color: rgba(245,236,228,0.85); }
+  .s02 .docket {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 18px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(245,236,228,0.78);
+    padding: 18px 0;
+    border-top: 1px solid rgba(245,93,74,0.35);
+    border-bottom: 1px solid rgba(245,93,74,0.35);
+  }
+  .s02 .docket dt {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: #ff5d4a;
+    align-self: start;
+    padding-top: 2px;
+  }
+  .s02 .docket dd { margin: 0; }
+  .s02 .redact {
+    background: #ff5d4a; color: #ff5d4a;
+    padding: 0 0.18em; margin: 0 0.04em;
+    user-select: none;
+  }
+  .s02 .read-on { color: #ff5d4a; border-color: #ff5d4a; --flip: #0e0a09; }
+  .s02 .decor::before {
+    content: "CONFIDENTIAL · DO NOT DISTRIBUTE · CONFIDENTIAL · DO NOT DISTRIBUTE · CONFIDENTIAL · DO NOT DISTRIBUTE · CONFIDENTIAL";
+    position: absolute;
+    top: 6vw; left: -2vw;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: rgba(255,93,74,0.14);
+    transform: rotate(-1deg);
+    white-space: nowrap;
+  }
+  .s02 .decor::after {
+    content: "";
+    position: absolute;
+    right: -8vw; bottom: -10vw;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(255,93,74,0.12), transparent 70%);
+  }
+
+  /* ─── s03 · Academic journal · Anthropic Petri ─── */
+  .s03 {
+    background: #f3ead7;
+    color: #14233a;
+  }
+  .s03 .tag {
+    color: #14233a;
+    border-color: #14233a;
+  }
+  .s03 .hed {
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    color: #14233a;
+  }
+  .s03 .hed em {
+    font-style: italic;
+    color: #b34000;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s03 .lede { color: rgba(20,35,58,0.82); }
+  .s03 .journal {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(20px, 3vw, 40px);
+    align-items: start;
+    padding-top: 8px;
+    border-top: 1px solid rgba(20,35,58,0.30);
+  }
+  .s03 .journal .body {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.2vw, 19px);
+    line-height: 1.55;
+    color: rgba(20,35,58,0.85);
+  }
+  .s03 .journal .body p { margin: 0 0 0.9em; }
+  .s03 .journal aside {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(20,35,58,0.78);
+    border-left: 2px solid #b34000;
+    padding-left: 18px;
+  }
+  .s03 .journal aside h4 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #b34000;
+    margin: 0 0 12px;
+  }
+  .s03 .journal aside dl { margin: 0; }
+  .s03 .journal aside dt {
+    font-weight: 700;
+    color: #14233a;
+    margin-top: 10px;
+  }
+  .s03 .journal aside dt:first-of-type { margin-top: 0; }
+  .s03 .journal aside dd { margin: 2px 0 0; }
+  .s03 .read-on { color: #b34000; border-color: #b34000; --flip: #f3ead7; }
+  .s03 .decor::before {
+    content: "Petri.";
+    position: absolute;
+    right: -2vw; bottom: -6vw;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 36vw;
+    line-height: 0.8;
+    color: rgba(20,35,58,0.05);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  @media (max-width: 800px) {
+    .s03 .journal { grid-template-columns: 1fr; }
+  }
+
+  /* ─── s04 · Blueprint · AISI GPT-5.5 cyber eval ─── */
+  .s04 {
+    background: #0c2a3c;
+    color: #d6e9f5;
+  }
+  .s04 .tag {
+    color: #ffe066;
+    border-color: rgba(255,224,102,0.6);
+  }
+  .s04 .hed {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(40px, 5.6vw, 84px);
+    letter-spacing: -0.02em;
+    color: #d6e9f5;
+  }
+  .s04 .hed em {
+    font-style: normal;
+    color: #ffe066;
+    border-bottom: 3px solid #ffe066;
+    padding-bottom: 0.05em;
+  }
+  .s04 .lede {
+    font-family: var(--mono);
+    font-size: clamp(15px, 1.1vw, 17px);
+    line-height: 1.6;
+    color: rgba(214,233,245,0.85);
+    max-width: 56ch;
+  }
+  .s04 .specs {
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    gap: 8px 22px;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: rgba(214,233,245,0.92);
+    padding-top: 16px;
+    border-top: 1px dashed rgba(214,233,245,0.35);
+  }
+  .s04 .specs .lbl { text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; color: rgba(214,233,245,0.65); align-self: center; }
+  .s04 .specs .row { color: #d6e9f5; align-self: center; }
+  .s04 .specs .val { color: #ffe066; font-weight: 600; text-align: right; align-self: center; }
+  .s04 .read-on { color: #ffe066; border-color: #ffe066; --flip: #0c2a3c; }
+  .s04 .decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(214,233,245,0.06) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(90deg, rgba(214,233,245,0.06) 1px, transparent 1px) 0 0 / 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 60%, transparent 100%);
+  }
+  .s04 .decor::after {
+    content: "";
+    position: absolute;
+    top: 12px; left: 12px;
+    width: 18px; height: 18px;
+    border-top: 2px solid rgba(255,224,102,0.6);
+    border-left: 2px solid rgba(255,224,102,0.6);
+  }
+  @media (max-width: 800px) {
+    .s04 .specs { grid-template-columns: 1fr; gap: 4px 0; }
+    .s04 .specs .lbl { padding-top: 8px; }
+    .s04 .specs .val { text-align: left; }
+    .s04 .decor::after { display: none; }
+  }
+
+  /* ─── s05 · Pastel rose · 2028 scenarios (tonal inversion) ─── */
+  .s05 {
+    background: linear-gradient(160deg, #fbeae3 0%, #f6d0d8 55%, #efb8c8 100%);
+    color: #3a1f2a;
+  }
+  .s05 .tag {
+    color: #3a1f2a;
+    border-color: #3a1f2a;
+    background: rgba(255,255,255,0.35);
+  }
+  .s05 .hed {
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-style: italic;
+    color: #3a1f2a;
+  }
+  .s05 .hed em {
+    font-style: italic;
+    color: #983048;
+    font-weight: 900;
+  }
+  .s05 .lede { color: rgba(58,31,42,0.86); font-style: italic; }
+  .s05 .twoup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(18px, 3vw, 36px);
+  }
+  .s05 .twoup section {
+    background: rgba(255,255,255,0.42);
+    padding: 22px 24px;
+    border-radius: 14px;
+    border: 1px solid rgba(58,31,42,0.18);
+  }
+  .s05 .twoup h4 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(20px, 1.8vw, 26px);
+    margin: 0 0 8px;
+    color: #983048;
+  }
+  .s05 .twoup p {
+    font-family: var(--serif);
+    font-size: clamp(16px, 1.1vw, 18px);
+    line-height: 1.55;
+    margin: 0;
+    color: rgba(58,31,42,0.88);
+  }
+  .s05 .read-on { color: #983048; border-color: #983048; --flip: #fbeae3; }
+  .s05 .decor::before {
+    content: "";
+    position: absolute;
+    right: -10vw; top: -10vw;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.55), transparent 65%);
+  }
+  @media (max-width: 800px) {
+    .s05 .twoup { grid-template-columns: 1fr; }
+  }
+
+  /* ─── s06 · Neo-brutalist yellow · Code with Claude · 7 ideas ─── */
+  .s06 {
+    background: #ffd400;
+    color: #0b0b0b;
+  }
+  .s06 .tag {
+    color: #0b0b0b;
+    background: #0b0b0b;
+    color: #ffd400;
+    border-color: #0b0b0b;
+    border-radius: 0;
+  }
+  .s06 .hed {
+    font-family: var(--sans);
+    font-weight: 900;
+    font-style: normal;
+    text-transform: uppercase;
+    font-size: clamp(48px, 8vw, 132px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: #0b0b0b;
+  }
+  .s06 .hed em {
+    font-style: normal;
+    background: #0b0b0b;
+    color: #ffd400;
+    padding: 0.02em 0.18em 0.05em;
+    display: inline-block;
+  }
+  .s06 .lede { color: rgba(11,11,11,0.85); }
+  .s06 .ideas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    border: 4px solid #0b0b0b;
+    background: #0b0b0b;
+  }
+  .s06 .ideas li {
+    list-style: none;
+    background: #ffd400;
+    padding: 16px 18px;
+    border: 2px solid #0b0b0b;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(14px, 1vw, 16px);
+    line-height: 1.35;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    min-width: 0;
+  }
+  .s06 .ideas .n {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(22px, 2vw, 32px);
+    line-height: 1;
+    color: #0b0b0b;
+    flex: 0 0 auto;
+  }
+  .s06 .ideas .b { min-width: 0; }
+  .s06 .ideas ul { margin: 0; padding: 0; }
+  .s06 .ideas { padding: 0; margin: 0; list-style: none; }
+  .s06 .read-on {
+    color: #ffd400;
+    background: #0b0b0b;
+    border-color: #0b0b0b;
+    border-radius: 0;
+    --flip: #0b0b0b;
+  }
+  .s06 .read-on:hover { background: #0b0b0b; }
+  .s06 .read-on:hover span { color: #ffd400; }
+  @media (max-width: 800px) {
+    .s06 .ideas { grid-template-columns: 1fr; }
+  }
+
+  /* ─── s07 · Risograph duotone · Open Design ─── */
+  .s07 {
+    background: #f4efe5;
+    color: #002a32;
+  }
+  .s07 .tag {
+    color: #002a32;
+    border-color: #002a32;
+  }
+  .s07 .hed {
+    color: #00a3b4;
+    font-weight: 900;
+    text-shadow: 3px 3px 0 rgba(255,0,108,0.85);
+  }
+  .s07 .hed em {
+    font-style: italic;
+    color: #ff006c;
+    text-shadow: -3px -3px 0 rgba(0,163,180,0.7);
+  }
+  .s07 .lede { color: rgba(0,42,50,0.86); }
+  .s07 .swatches {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .s07 .swatches > div {
+    aspect-ratio: 1;
+    background: #00a3b4;
+    position: relative;
+    overflow: hidden;
+  }
+  .s07 .swatches > div::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #ff006c;
+    transform: translate(4px, 4px);
+    mix-blend-mode: multiply;
+    opacity: 0.78;
+  }
+  .s07 .swatches > div:nth-child(odd)::after { transform: translate(-3px, 5px); }
+  .s07 .swatches > div:nth-child(3n)::after  { transform: translate(5px, -3px); }
+  .s07 .swatches .n {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    color: #f4efe5;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(14px, 1.2vw, 18px);
+    mix-blend-mode: difference;
+  }
+  .s07 .read-on { color: #ff006c; border-color: #ff006c; --flip: #f4efe5; }
+  .s07 .decor::before {
+    content: "open";
+    position: absolute;
+    left: -2vw; bottom: -6vw;
+    font-family: var(--serif);
+    font-weight: 900;
+    font-style: italic;
+    font-size: 28vw;
+    line-height: 0.8;
+    color: rgba(0,163,180,0.10);
+    letter-spacing: -0.06em;
+  }
+  @media (max-width: 800px) {
+    .s07 .swatches { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+
+  /* ─── s08 · Newsprint · AI Slop Crisis ─── */
+  .s08 {
+    background: #efe7d6;
+    color: #15110a;
+  }
+  .s08 .tag {
+    color: #15110a;
+    border-color: #15110a;
+    border-radius: 0;
+    text-transform: uppercase;
+  }
+  .s08 .hed {
+    color: #15110a;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-weight: 900;
+  }
+  .s08 .hed em {
+    font-style: italic;
+    color: #6a1c0b;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .s08 .lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(19px, 1.4vw, 22px);
+    line-height: 1.45;
+    border-top: 2px solid #15110a;
+    border-bottom: 1px solid rgba(21,17,10,0.4);
+    padding: 14px 0;
+    max-width: 60ch;
+  }
+  .s08 .columns {
+    column-count: 3;
+    column-gap: clamp(24px, 3vw, 40px);
+    font-family: var(--serif);
+    font-size: clamp(15px, 1.05vw, 17px);
+    line-height: 1.55;
+    color: rgba(21,17,10,0.92);
+    text-align: justify;
+    hyphens: auto;
+  }
+  .s08 .columns p { margin: 0 0 0.9em; break-inside: avoid; }
+  .s08 .columns h4 {
+    font-family: var(--serif);
+    font-variant-caps: small-caps;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: #6a1c0b;
+    margin: 0 0 4px;
+  }
+  .s08 .read-on { color: #6a1c0b; border-color: #6a1c0b; --flip: #efe7d6; }
+  .s08 .decor::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 1px;
+    background: rgba(21,17,10,0.08);
+  }
+  @media (max-width: 800px) {
+    .s08 .columns { column-count: 1; hyphens: manual; }
+    .s08 .columns { text-align: left; }
+  }
+
+  /* ─── Colophon · spreadsheet / tabular ─── */
+  .colophon {
+    background: #0b0b0b;
+    color: #d6d6d6;
+  }
+  .colophon .hed {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: clamp(36px, 5vw, 64px);
+    color: #f3ead7;
+    letter-spacing: -0.01em;
+  }
+  .colophon .hed em {
+    font-style: italic;
+    color: #ff5d4a;
+    font-family: var(--serif);
+    font-weight: 800;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .colophon .lede {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: rgba(214,214,214,0.78);
+    max-width: 64ch;
+    line-height: 1.6;
+  }
+  .colophon .grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: rgba(214,214,214,0.86);
+    border-top: 1px solid rgba(214,214,214,0.25);
+  }
+  .colophon .grid tr { border-bottom: 1px solid rgba(214,214,214,0.10); }
+  .colophon .grid th, .colophon .grid td {
+    text-align: left;
+    padding: 10px 14px 10px 0;
+    vertical-align: top;
+  }
+  .colophon .grid th {
+    color: #ff5d4a;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 11px;
+    width: 22%;
+  }
+  .colophon .folio { color: rgba(214,214,214,0.55); }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═════════════ COVER · single-word mood "AUDITS." ═════════════ -->
+<section class="spread cover" id="cover">
+  <header class="folio">
+    <span>Ephemeris · Issue 031</span>
+    <span>Tuesday · 19 May 2026 · Zürich</span>
+  </header>
+  <div class="main">
+    <p class="strap">// Tuesday Edition · Vol. 031</p>
+    <h1 class="mood">Audits</h1>
+    <p class="dek">Today's issue is about the machinery that watches the machine: open-sourced alignment tools, government cyber benchmarks, security LLMs pointed at production code, and a 2028 forecast neither side wants to ignore.</p>
+    <nav class="toc">
+      <a href="#s01"><span><span class="num">01</span>A new optimizer kills neurons. Aurora explains why.</span><span>Import AI</span></a>
+      <a href="#s02"><span><span class="num">02</span>We pointed a security LLM at our own infrastructure.</span><span>Cloudflare</span></a>
+      <a href="#s03"><span><span class="num">03</span>Anthropic donates its alignment-audit tool.</span><span>Anthropic Research</span></a>
+      <a href="#s04"><span><span class="num">04</span>Government auditors grade GPT-5.5 on cyber.</span><span>AISI · via @seeallochnaya</span></a>
+      <a href="#s05"><span><span class="num">05</span>Two ways the next two years end. Both plausible.</span><span>Anthropic Institute</span></a>
+      <a href="#s06"><span><span class="num">06</span>Seven ideas from Code with Claude.</span><span>via @ProductsAndStartups</span></a>
+      <a href="#s07"><span><span class="num">07</span>An open-source rival to Claude Design.</span><span>via @TochkiNadAI</span></a>
+      <a href="#s08"><span><span class="num">08</span>The slop tide rises. Don't sound like the tide.</span><span>Jeff Bullas</span></a>
+    </nav>
+  </div>
+  <div class="cta"></div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ s01 · Neon · Import AI 457 ═════════════ -->
+<section class="spread s01" id="s01">
+  <header class="folio">
+    <span>Ephemeris · Issue 031</span>
+    <span>01 / 8 · Import AI</span>
+  </header>
+  <div class="main">
+    <span class="tag">AI Research · Optimizers</span>
+    <h2 class="hed">A new optimizer kills neurons. <em>Aurora</em> explains why.</h2>
+    <p class="lede">Jack Clark's Import AI 457 packs three uncomfortable signals into one issue: the Aurora optimizer that finally fixes Muon's silent neuron-death problem, a twenty-year-old precision-calculation virus that reads like a template for an AI-targeted Stuxnet, and a serious attempt to define <em>positive</em> alignment — research aimed at human flourishing, not only at not-harming.</p>
+    <div class="figure">
+      <pre class="terminal"><span class="cmt"># muon.step()  →  some neurons drift to zero variance and stop learning</span>
+<span class="key">for</span> p <span class="key">in</span> params:
+    g  = grad(p)
+    <span class="var">m</span>  = momentum_update(<span class="var">m</span>, g)             <span class="cmt"># muon: spectral norm</span>
+    <span class="var">u</span>  = newton_schulz(<span class="var">m</span>)               <span class="cmt"># cursed: explodes a tail of units</span>
+
+<span class="cmt"># aurora: scale per-unit, then constrain — neurons stay alive</span>
+<span class="key">for</span> p <span class="key">in</span> params:
+    g  = grad(p)
+    <span class="var">m</span>  = momentum_update(<span class="var">m</span>, g)
+    <span class="var">s</span>  = per_unit_scale(<span class="var">m</span>)              <span class="cmt"># <- the fix</span>
+    <span class="var">u</span>  = newton_schulz(<span class="var">m</span> / <span class="var">s</span>) * <span class="var">s</span></pre>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://jack-clark.net/2026/05/18/import-ai-457-ai-stuxnet-cursed-muon-optimizer-and-positive-alignment/" target="_blank" rel="noopener"><span>Read Import AI 457 →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ s02 · Dark classified · Cloudflare Glasswing ═════════════ -->
+<section class="spread s02" id="s02">
+  <header class="folio">
+    <span>Ephemeris · Issue 031</span>
+    <span>02 / 8 · Cloudflare</span>
+  </header>
+  <div class="main">
+    <span class="tag">Security · Frontier Models</span>
+    <h2 class="hed">We pointed a security LLM at our <em>own</em> infrastructure code.</h2>
+    <p class="lede">Project Glasswing is Cloudflare's pre-flight check on the new generation of security-focused frontier models. They ran Mythos and peers against real production code — auth, ingress, rate-limiting — and logged what it caught, what it missed, and how often it confidently invented bugs that did not exist.</p>
+    <div class="figure">
+      <dl class="docket">
+        <dt>Target</dt><dd>Live Cloudflare infrastructure source — not a benchmark fork.</dd>
+        <dt>Models</dt><dd>Mythos (Anthropic) · <span class="redact">[redacted]</span> · <span class="redact">[redacted]</span></dd>
+        <dt>Hits</dt><dd>Confirmed previously-unknown classes of unsafe library use; missed a sizeable share of business-logic flaws.</dd>
+        <dt>Misses</dt><dd>Hallucinated vulnerabilities that diffed clean and reviewer-rejected at high rates.</dd>
+        <dt>Verdict</dt><dd>Useful as a force-multiplier under human triage. Not yet trustworthy unsupervised.</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://blog.cloudflare.com/cyber-frontier-models/" target="_blank" rel="noopener"><span>Read on Cloudflare →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ s03 · Academic journal · Anthropic Petri ═════════════ -->
+<section class="spread s03" id="s03">
+  <header class="folio">
+    <span>Ephemeris · Issue 031</span>
+    <span>03 / 8 · Anthropic Research</span>
+  </header>
+  <div class="main">
+    <span class="tag">Alignment · Open Source</span>
+    <h2 class="hed">Anthropic donates its <em>alignment audit</em> to everyone.</h2>
+    <p class="lede">Petri is the internal instrument Anthropic has used to interrogate Claude for agentic misalignment. They've now open-sourced it — donating the same tool that scrutinizes their own production models to anyone shipping an agent.</p>
+    <div class="figure">
+      <div class="journal">
+        <div class="body">
+          <p>The pitch is unusually direct: alignment audits should not be a club good. Petri runs Claude — or any model wired to its harness — through structured probes designed to expose the specific failure modes Anthropic worries about. Reward hacking, deceptive compliance, capability sandbagging. The probes are the catalog Anthropic uses on itself.</p>
+          <p>The donation matters more than the tool. The signalling shifts: a frontier lab is saying out loud that "we use our own evals" is not a moat. If your agent stack does not yet have a permanent audit pipeline, this is the cheapest possible Tuesday-afternoon adoption.</p>
+        </div>
+        <aside>
+          <h4>Glossary</h4>
+          <dl>
+            <dt>Petri</dt>
+            <dd>Anthropic's open-sourced harness for running structured misalignment probes against agentic models.</dd>
+            <dt>Agentic misalignment</dt>
+            <dd>Failure modes that only surface when a model is given tools and a goal — not in single-turn chat.</dd>
+            <dt>Audit run</dt>
+            <dd>A scheduled, reproducible pass: same probes, same scoring, comparable across releases.</dd>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/research/donating-open-source-petri" target="_blank" rel="noopener"><span>Read on Anthropic →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ s04 · Blueprint · AISI GPT-5.5 cyber eval ═════════════ -->
+<section class="spread s04" id="s04">
+  <header class="folio">
+    <span>Ephemeris · Issue 031</span>
+    <span>04 / 8 · AISI · via @seeallochnaya</span>
+  </header>
+  <div class="main">
+    <span class="tag">Cyber · Government Benchmark</span>
+    <h2 class="hed">Government auditors give GPT-5.5 a <em>barely-passing</em> grade on cyber.</h2>
+    <p class="lede">The UK AI Security Institute's evaluation of GPT-5.5 finds only marginal improvement on multi-stage offensive cyber tasks over the prior generation. Useful as a public capability marker — and as a quiet correction to the "every release is a jump" narrative procurement teams keep buying.</p>
+    <div class="figure">
+      <div class="specs">
+        <div class="lbl">Evaluator</div>
+        <div class="row">UK AI Security Institute (AISI)</div>
+        <div class="val">.gov.uk</div>
+
+        <div class="lbl">Subject</div>
+        <div class="row">OpenAI GPT-5.5</div>
+        <div class="val">May 2026</div>
+
+        <div class="lbl">Domain</div>
+        <div class="row">Multi-stage network exploitation, code-vuln analysis</div>
+        <div class="val">cyber</div>
+
+        <div class="lbl">Δ vs prior</div>
+        <div class="row">Minimal — within noise on most task classes</div>
+        <div class="val">marginal</div>
+
+        <div class="lbl">Reading</div>
+        <div class="row">A public capability marker, not a marketing chart</div>
+        <div class="val">audit</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities" target="_blank" rel="noopener"><span>Read the AISI report →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ s05 · Pastel rose · 2028 scenarios (inversion) ═════════════ -->
+<section class="spread s05" id="s05">
+  <header class="folio">
+    <span>Ephemeris · Issue 031</span>
+    <span>05 / 8 · Anthropic Institute</span>
+  </header>
+  <div class="main">
+    <span class="tag">Policy · Forecast</span>
+    <h2 class="hed">Two ways the next two years <em>end</em>. Both are plausible.</h2>
+    <p class="lede">Anthropic's policy team sketches a pair of 2028 scenarios for global AI leadership — and the investments and decisions that push toward each. A reading list more than a manifesto, but the more useful document for the founders and engineers who keep being asked "where is this all going."</p>
+    <div class="figure">
+      <div class="twoup">
+        <section>
+          <h4>Scenario A · Bounded</h4>
+          <p>Frontier scaling slows; capability gains come from harnesses, evals, and tooling. The moat moves to integration depth and to the model's permission to act. Auditors and standards bodies become load-bearing.</p>
+        </section>
+        <section>
+          <h4>Scenario B · Steep</h4>
+          <p>Scaling continues unbroken; capability jumps outpace governance. Concentration risk hardens around the labs with the most compute. The marginal year of policy work matters more than any single benchmark.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.anthropic.com/research/2028-ai-leadership" target="_blank" rel="noopener"><span>Read the scenarios →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ s06 · Neo-brutalist yellow · Code with Claude · 7 ideas ═════════════ -->
+<section class="spread s06" id="s06">
+  <header class="folio">
+    <span>Ephemeris · Issue 031</span>
+    <span>06 / 8 · via @ProductsAndStartups</span>
+  </header>
+  <div class="main">
+    <span class="tag">Builder Notes · Conf Recap</span>
+    <h2 class="hed"><em>SEVEN</em> IDEAS FROM CODE WITH CLAUDE.</h2>
+    <p class="lede">Bayram Annakov's debrief from Code with Claude 2026, distilled. Pick one, ship it this week. The conference was full of opinions; the through-line is that the infrastructure around the model is the lever, not the model.</p>
+    <div class="figure">
+      <ul class="ideas">
+        <li><span class="n">01</span><span class="b">Use a stronger model as <em>advisor</em> to a weaker model in your agent loop.</span></li>
+        <li><span class="n">02</span><span class="b">Plan around an agent half-life of 6–12 months. Don't tightly couple.</span></li>
+        <li><span class="n">03</span><span class="b">The moat is the infrastructure around the model, not the model.</span></li>
+        <li><span class="n">04</span><span class="b">Skills &gt; prompts. Skills are versionable, testable, transferable.</span></li>
+        <li><span class="n">05</span><span class="b">Verification before completion is the single highest-leverage habit.</span></li>
+        <li><span class="n">06</span><span class="b">Build evals before you build features. Treat them like CI, not QA.</span></li>
+        <li><span class="n">07</span><span class="b">Make agents grabbable: one task = one issue = one PR.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://youtu.be/GMIWm5y90xA" target="_blank" rel="noopener"><span>Watch the playlist →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ s07 · Risograph · Open Design ═════════════ -->
+<section class="spread s07" id="s07">
+  <header class="folio">
+    <span>Ephemeris · Issue 031</span>
+    <span>07 / 8 · GitHub · via @TochkiNadAI</span>
+  </header>
+  <div class="main">
+    <span class="tag">Creative Tools · Open Source</span>
+    <h2 class="hed">An open-source rival to <em>Claude Design</em>.</h2>
+    <p class="lede">Open Design ships with nineteen Skills, seventy-one design-system templates, multi-format export, and a model-agnostic harness that runs against Claude, GPT, and Gemini APIs. The "designer agent" category has its first credible commons.</p>
+    <div class="figure">
+      <div class="swatches">
+        <div><span class="n">01</span></div>
+        <div><span class="n">02</span></div>
+        <div><span class="n">03</span></div>
+        <div><span class="n">04</span></div>
+        <div><span class="n">05</span></div>
+        <div><span class="n">06</span></div>
+        <div><span class="n">07</span></div>
+        <div><span class="n">08</span></div>
+        <div><span class="n">09</span></div>
+        <div><span class="n">10</span></div>
+        <div><span class="n">11</span></div>
+        <div><span class="n">12</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://github.com/nexu-io/open-design" target="_blank" rel="noopener"><span>Browse on GitHub →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ s08 · Newsprint · AI Slop Crisis ═════════════ -->
+<section class="spread s08" id="s08">
+  <header class="folio">
+    <span>Ephemeris · Issue 031</span>
+    <span>08 / 8 · Jeff Bullas</span>
+  </header>
+  <div class="main">
+    <span class="tag">Content · Authenticity</span>
+    <h2 class="hed">The slop tide rises. Stop <em>sounding</em> like the tide.</h2>
+    <p class="lede">AI-generated content has finally saturated the feeds — and the marginal post now competes against the median noise. Bullas's argument is simple, slightly dull, and correct: in a flood, the only thing that floats is a voice.</p>
+    <div class="figure">
+      <div class="columns">
+        <p><h4>The Diagnosis</h4>The tax on attention has flipped. Five years ago a polished generic post got a fair hearing. Today the same post reads as a tell that nobody on the other end is real — and readers route around it the way they route around captcha noise.</p>
+        <p><h4>What Still Works</h4>First-person experience with a named author. Numbers tied to the author's own work, not lifted from a dashboard screenshot. An opinion the author would still hold without an audience. Specifics — model names, dates, the exact moment something broke.</p>
+        <p><h4>The Cheaper Way</h4>Stop drafting in the model's voice and editing toward yours; draft in yours and let the model fact-check. Reverse the polarity. The output is shorter, less symmetric, more linkable. It is also slower to make, which is now the point.</p>
+      </div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="read-on" href="https://www.jeffbullas.com/ai-slop-crisis/" target="_blank" rel="noopener"><span>Read Jeff Bullas →</span></a>
+  </div>
+  <div class="decor" aria-hidden="true"></div>
+</section>
+
+<!-- ═════════════ Colophon · spreadsheet ═════════════ -->
+<section class="spread colophon" id="colophon">
+  <header class="folio">
+    <span>End of issue 031 · 19 May 2026</span>
+    <span>Back to top ↑</span>
+  </header>
+  <div class="main">
+    <h3 class="hed">That's <em>today.</em></h3>
+    <p class="lede">Eight stories on the apparatus that watches the model: an open-sourced alignment harness, a government cyber benchmark, a security LLM pointed at real infrastructure, a forecast that prices in two futures, plus a conference debrief, a designer commons, and a content reset.</p>
+    <div class="figure">
+      <table class="grid">
+        <tr>
+          <th>Issue</th>
+          <td>031 · Tuesday 19 May 2026 · Zürich</td>
+        </tr>
+        <tr>
+          <th>Sources fed</th>
+          <td>Anthropic Research · Cloudflare · Jack Clark / Import AI · AISI · Jeff Bullas · GitHub · YouTube</td>
+        </tr>
+        <tr>
+          <th>Via channels</th>
+          <td>@seeallochnaya · @ProductsAndStartups · @TochkiNadAI</td>
+        </tr>
+        <tr>
+          <th>Rubric</th>
+          <td>AI tools you could adopt this week · Creative software · Dev tools &amp; agentic coding · Privacy &amp; security · Science &amp; research with a practical kernel · Anything immediately actionable</td>
+        </tr>
+        <tr>
+          <th>Next issue</th>
+          <td>Wednesday 20 May 2026 · 08:00 Zürich</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="cta"></div>
+</section>
+
+</main>
+</body>
+</html>

@@ -1,4 +1,5 @@
 http://hnup.date/hn-sota
+https://aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities
 https://andonlabs.com/blog/openai-gpt-5-5-vending-bench
 https://anthropic.com/engineering/advanced-tool-use
 https://anthropic.com/engineering/AI-resistant-technical-evaluations
@@ -18,7 +19,9 @@ https://anthropic.com/news/claude-opus-4-7
 https://anthropic.com/news/election-safeguards-update
 https://anthropic.com/news/finance-agents
 https://anthropic.com/news/higher-limits-spacex
+https://anthropic.com/research/2028-ai-leadership
 https://anthropic.com/research/claude-personal-guidance
+https://anthropic.com/research/donating-open-source-petri
 https://anthropic.com/research/natural-language-autoencoders
 https://anthropic.com/research/teaching-claude-why
 https://arxiv.org/abs/2509.00462
@@ -34,6 +37,7 @@ https://blog.cloudflare.com/building-for-the-future
 https://blog.cloudflare.com/clickhouse-query-plan-contention
 https://blog.cloudflare.com/code-orange-fail-small-complete
 https://blog.cloudflare.com/copy-fail-linux-vulnerability-mitigation
+https://blog.cloudflare.com/cyber-frontier-models
 https://blog.cloudflare.com/de-tld-outage-dnssec
 https://blog.cloudflare.com/dynamic-workflows
 https://blog.cloudflare.com/high-performance-llms
@@ -91,6 +95,7 @@ https://github.com/DenisSergeevitch/chatgpt-portal
 https://github.com/DenisSergeevitch/genternet-chrome
 https://github.com/DenisSergeevitch/UFO-USA
 https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md
+https://github.com/nexu-io/open-design
 https://github.com/oven-sh/bun/pull/30412
 https://github.com/specs-devs/samples/tree/main/Agent%20Center
 https://hackernews.foresyn.ai/
@@ -105,6 +110,8 @@ https://jack-clark.net/2026/04/13/import-ai-453-breaking-ai-agents-mirrorcode-an
 https://jack-clark.net/2026/04/20/import-ai-454-automating-alignment-research-safety-study-of-a-chinese-model-hifloat4
 https://jack-clark.net/2026/05/04/import-ai-455-automating-ai-research
 https://jack-clark.net/2026/05/11/import-ai-456-rsi-and-economic-growth-radical-optionality-for-ai-regulation-and-a-neural-computer
+https://jack-clark.net/2026/05/18/import-ai-457-ai-stuxnet-cursed-muon-optimizer-and-positive-alignment
+https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/ideas-die-unseen
 https://jeffbullas.com/stop-using-just-one-ai
 https://jeffbullas.com/truth-business-growth-strategy
@@ -210,6 +217,7 @@ https://vercel.com/blog/zdr-on-ai-gateway
 https://wheresyoured.at/where-are-all-the-data-centers
 https://x.com/andonlabs/status/2042765807781056646
 https://xbow.com/blog/mythos-offensive-security-xbow-evaluation
+https://youtu.be/GMIWm5y90xA
 https://youtu.be/xmkSf5IS-zw
 https://youtube.com/@MSE435EconomicsofAI
 https://youtube.com/watch
