@@ -22,6 +22,7 @@ https://anthropic.com/news/higher-limits-spacex
 https://anthropic.com/research/2028-ai-leadership
 https://anthropic.com/research/claude-personal-guidance
 https://anthropic.com/research/donating-open-source-petri
+https://anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench
 https://anthropic.com/research/natural-language-autoencoders
 https://anthropic.com/research/teaching-claude-why
 https://arxiv.org/abs/2509.00462
@@ -49,10 +50,13 @@ https://blog.cloudflare.com/q1-2026-internet-disruption-summary
 https://blog.cloudflare.com/quic-death-spiral-fix
 https://blog.cloudflare.com/shared-dictionaries
 https://blog.cloudflare.com/unweight-tensor-compression
+https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app
+https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026
 https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets
 https://chromewebstore.google.com/detail/pjoleapiipgcignjlbhhiighckpbhcpp
 https://claude.com/blog/agent-view-in-claude-code
 https://claude.com/blog/connectors-for-everyday-life
+https://cursor.com/blog/composer-2-5
 https://deeplearning.ai/short-courses/build-interactive-agents-with-generative-ui
 https://deeplearning.ai/the-batch/issue-347
 https://deeplearning.ai/the-batch/issue-349
@@ -111,6 +115,7 @@ https://jack-clark.net/2026/04/20/import-ai-454-automating-alignment-research-sa
 https://jack-clark.net/2026/05/04/import-ai-455-automating-ai-research
 https://jack-clark.net/2026/05/11/import-ai-456-rsi-and-economic-growth-radical-optionality-for-ai-regulation-and-a-neural-computer
 https://jack-clark.net/2026/05/18/import-ai-457-ai-stuxnet-cursed-muon-optimizer-and-positive-alignment
+https://jeffbullas.com/ai-reinvention-truth
 https://jeffbullas.com/ai-slop-crisis
 https://jeffbullas.com/ideas-die-unseen
 https://jeffbullas.com/stop-using-just-one-ai
@@ -124,6 +129,7 @@ https://nextjs.org/blog/next-16-2-ai
 https://nextjs.org/blog/nextjs-across-platforms
 https://nextjs.org/blog/turbopack-incremental-computation
 https://openai.com/academy/codex-for-work/how-data-science-teams-use-codex
+https://openai.com/index/advancing-content-provenance
 https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api
 https://openai.com/index/building-codex-windows-sandbox
 https://openai.com/index/codex-for-almost-everything
@@ -154,6 +160,7 @@ https://posthog.com/blog/best-mcp-servers-for-startups
 https://posthog.com/blog/best-real-time-analytics-platforms
 https://posthog.com/blog/duckdb-vs-clickhouse
 https://posthog.com/blog/making-claude-cowork-actually-useful
+https://posthog.com/blog/minimum-viable-product-marketing
 https://posthog.com/blog/self-driving-product
 https://posthog.com/blog/testing-ai-agents
 https://posthog.com/blog/untangling-rayon-and-tokio
